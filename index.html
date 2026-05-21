@@ -54,7 +54,6 @@ p.lead{font-size:18px;color:var(--text2);line-height:1.7;max-width:560px;font-we
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:12px;font-weight:500}
 .badge-green{background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25)}
 .badge-amber{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.25)}
-.badge-rose{background:rgba(244,63,94,.12);color:#fb7185;border:1px solid rgba(244,63,94,.25)}
 .badge-indigo{background:rgba(99,102,241,.12);color:var(--accent3);border:1px solid rgba(99,102,241,.25)}
 
 /* Pulse dot */
@@ -65,7 +64,6 @@ p.lead{font-size:18px;color:var(--text2);line-height:1.7;max-width:560px;font-we
 .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:.18}
 .orb1{width:500px;height:500px;background:var(--accent);top:-100px;right:-100px}
 .orb2{width:400px;height:400px;background:#a855f7;bottom:0;left:-100px}
-.orb3{width:300px;height:300px;background:#06b6d4;top:40%;left:40%}
 
 /* HERO */
 #hero-wrap{position:relative;overflow:hidden;min-height:calc(100vh - 60px);display:flex;align-items:center}
@@ -82,51 +80,43 @@ p.lead{font-size:18px;color:var(--text2);line-height:1.7;max-width:560px;font-we
 .stat-num{font-family:var(--font-head);font-size:36px;font-weight:700;color:var(--text);line-height:1}
 .stat-label{font-size:13px;color:var(--text3);margin-top:4px}
 
-/* Pod showcase card */
-.pod-demo{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:48px}
-.pod-demo-header{background:var(--bg3);padding:16px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border); flex-wrap: wrap;}
-.traffic{width:10px;height:10px;border-radius:50%; flex-shrink: 0;}
-.pod-demo-body{padding:20px}
-.pod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.pod-slot{border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 10px;text-align:center;cursor:pointer;transition:all .15s;position:relative}
-.pod-slot:hover{border-color:var(--accent);background:rgba(99,102,241,.08)}
-.pod-slot.available{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.05)}
-.pod-slot.occupied{border-color:var(--border);background:var(--bg3);opacity:.5;cursor:not-allowed}
-.pod-slot.selected{border-color:var(--accent);background:rgba(99,102,241,.15)}
-
-/* Pricing Page Styles & Grid Update */
+/* Pricing Page Styles */
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:48px}
 .pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;position:relative;transition:all .2s;display:flex;flex-direction:column;justify-content:space-between}
 .pricing-card.featured{border-color:var(--accent);background:rgba(99,102,241,.04)}
-.pricing-card.featured::before{content:'Most Popular';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:4px 14px;border-radius:0 0 var(--radius-xs) var(--radius-xs);letter-spacing:.5px}
+.pricing-card.featured::before{content:'Ən Populyar';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:600;padding:4px 14px;border-radius:0 0 var(--radius-xs) var(--radius-xs);letter-spacing:.5px}
 .price-num{font-family:var(--font-head);font-size:40px;font-weight:800;color:var(--text);line-height:1;margin:16px 0 4px}
 .price-period{font-size:14px;color:var(--text3)}
 .price-features{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:10px}
 .price-features li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);line-height:1.4}
 .price-features li::before{content:'✓';color:var(--green);font-weight:600;flex-shrink:0}
 
+/* Cafe Styles */
+.cafe-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));gap:20px;margin-top:32px}
+.cafe-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;justify-content:space-between;transition:all 0.2s}
+.cafe-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.cafe-item-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.cafe-item-name{font-size:16px;font-weight:600;color:var(--text)}
+.cafe-item-price{font-family:var(--font-head);font-size:16px;font-weight:700;color:var(--accent2)}
+.cafe-item-desc{font-size:13px;color:var(--text2);line-height:1.4}
+.cafe-tag{font-size:11px;background:var(--surface2);color:var(--text3);padding:2px 8px;border-radius:100px;align-self:flex-start;margin-top:12px}
+
 /* Booking Layout */
 .booking-layout{max-width:960px;margin:0 auto;padding:40px 32px}
-.step-indicator{display:flex;align-items:center;gap:0;margin-bottom:40px}
-.step-dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--text3);transition:all .2s;flex-shrink:0}
-.step-dot.active{border-color:var(--accent);color:var(--accent);box-shadow:0 0 12px rgba(99,102,241,0.2)}
-.step-line{flex:1;height:1px;background:var(--border)}
 .pod-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-top:20px}
 .pod-select-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 16px;text-align:center;cursor:pointer;transition:all .2s}
 .pod-select-card.selected{border-color:var(--accent);background:rgba(99,102,241,.12)}
-.pod-select-card:hover:not(.busy){transform:translateY(-2px);border-color:var(--accent)}
-.pod-icon{font-size:28px;margin-bottom:8px}
+.pod-select-card:hover{transform:translateY(-2px);border-color:var(--accent)}
 .time-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:16px}
 .time-slot{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:12px;text-align:center;cursor:pointer;font-size:13px;color:var(--text2);transition:all .15s}
 .time-slot.selected{border-color:var(--accent);background:rgba(99,102,241,.12);color:var(--text)}
-.time-slot:hover{border-color:var(--accent)}
 .confirm-box{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius);padding:28px;margin-top:32px;text-align:center}
 
 /* StudyBuddy & Filters */
 .match-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-.filter-btn{background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:8px 16px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;font-family:var(--font-body)}
+.filter-btn{background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:8px 16px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s}
 .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent3);background:rgba(99,102,241,.1)}
-.buddy-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:16px;transition:all .2s;cursor:pointer;position:relative}
+.buddy-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;align-items:center;gap:16px;transition:all .2s;cursor:pointer}
 .buddy-card:hover{border-color:var(--border2);transform:translateY(-2px)}
 .buddy-card.selected-partner {border-color:var(--green);background:rgba(34,197,94,0.03)}
 .buddy-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
@@ -134,68 +124,45 @@ p.lead{font-size:18px;color:var(--text2);line-height:1.7;max-width:560px;font-we
 .buddy-name{font-size:15px;font-weight:500;color:var(--text)}
 .buddy-meta{font-size:13px;color:var(--text3);margin-top:2px}
 .buddy-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.buddy-tag{background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:2px 10px;font-size:11px;color:var(--text2);white-space:nowrap}
-.match-score{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--green);flex-shrink:0}
-.match-btn{background:var(--border);border:none;color:var(--text);padding:6px 12px;border-radius:var(--radius-xs);font-size:12px;cursor:pointer;transition:all 0.15s}
+.buddy-tag{background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:2px 10px;font-size:11px;color:var(--text2)}
+.match-score{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--green)}
+.match-btn{background:var(--border);border:none;color:var(--text);padding:6px 12px;border-radius:var(--radius-xs);font-size:12px;cursor:pointer}
 .buddy-card.selected-partner .match-btn{background:var(--green);color:#fff}
 
 /* Secondbook Marketplace */
-.marketplace-filters{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px;align-items:center;width:100%}
-.search-input{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:12px 16px;font-family:var(--font-body);font-size:14px;color:var(--text);outline:none;flex:1;min-width:260px;transition:border-color .15s}
-.search-input:focus{border-color:var(--accent)}
+.search-input{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xs);padding:12px 16px;font-family:var(--font-body);font-size:14px;color:var(--text);outline:none;flex:1;min-width:260px}
 .book-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .2s;cursor:pointer; display: flex; flex-direction: column;}
 .book-card:hover{transform:translateY(-3px);border-color:var(--border2)}
 .book-cover{height:140px;display:flex;align-items:center;justify-content:center;font-size:44px;background:rgba(255,255,255,0.02)}
 .book-info{padding:16px; flex: 1; display: flex; flex-direction: column;}
-.book-title{font-size:14px;font-weight:500;color:var(--text);line-height:1.3}
-.book-course{font-size:12px;color:var(--text3);margin-top:4px}
 .book-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto; padding-top: 12px;}
 .book-price{font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--accent2)}
-.book-orig{font-size:12px;color:var(--text3);text-decoration:line-through}
 
 /* Dashboard Layout */
 .dash-layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 60px)}
 .dash-sidebar{background:var(--bg2);border-right:1px solid var(--border);padding:24px 16px;display:flex;flex-direction:column;gap:6px}
-.dash-nav-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s}
+.dash-nav-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;color:var(--text2)}
 .dash-nav-item:hover,.dash-nav-item.active{background:var(--surface);color:var(--text)}
-.dash-main{padding:40px;overflow-y:auto}
-.dash-title{font-family:var(--font-head);font-size:28px;font-weight:700;color:var(--text);margin-bottom:24px}
+.dash-main{padding:40px}
 .metric-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px}
-.metric-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
-.metric-value{font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--text);margin-top:6px}
-.timer-circle{width:140px;height:140px;border-radius:50%;border:4px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--text);margin:0 auto;position:relative;background:conic-gradient(var(--accent) 70%, var(--border) 0%)}
-.timer-inner{background:var(--surface);border-radius:50%;width:calc(100% - 12px);height:calc(100% - 12px);display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:2}
-.progress-bar{height:6px;background:var(--border);border-radius:100px;overflow:hidden;margin-top:12px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));width:65%}
+.timer-circle{width:140px;height:140px;border-radius:50%;border:4px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:32px;font-weight:700;color:var(--text);margin:0 auto;background:conic-gradient(var(--accent) 70%, var(--border) 0%)}
+.timer-inner{background:var(--surface);border-radius:50%;width:calc(100% - 12px);height:calc(100% - 12px);display:flex;align-items:center;justify-content:center;flex-direction:column}
 
 /* Footer */
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32px 32px;margin-top:auto}
 .footer-inner{max-width:1100px;margin:0 auto}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
-.footer-brand{font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--text);margin-bottom:12px}
-.footer-desc{font-size:14px;color:var(--text3);line-height:1.6}
-.footer-heading{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:16px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
-.footer-links a{font-size:14px;color:var(--text3);text-decoration:none;transition:color .15s}
-.footer-links a:hover{color:var(--text)}
 .footer-bottom{padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-copy{font-size:13px;color:var(--text3)}
 
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-.page.active {animation:fadeUp .35s ease both}
-
-/* Responsive Adjustments */
 @media (max-width: 992px) {
   .dash-layout { grid-template-columns: 1fr; }
-  .dash-sidebar { flex-direction: row; overflow-x: auto; padding: 12px 20px; border-right: none; border-bottom: 1px solid var(--border); }
+  .dash-sidebar { flex-direction: row; overflow-x: auto; padding: 12px 20px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width: 768px){
   .section { padding: 60px 20px; }
   h1.display { font-size: clamp(30px, 8vw, 38px); text-align: center; }
   h2.section-title { font-size: clamp(24px, 7vw, 28px); text-align: center; }
-  p.lead { font-size: 15px; text-align: center; margin: 16px auto 0; }
   .mobile-toggle { display: block; }
   .nav-links {
     display: none;
@@ -204,24 +171,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
     left: 0;
     width: 100%;
     background: rgba(9, 9, 11, 0.98);
-    backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 20px;
     border-bottom: 1px solid var(--border);
   }
   .nav-links.show { display: flex; }
-  .nav-link { text-align: left; padding: 12px; font-size: 15px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xs); margin-bottom: 4px;}
-  .hero-inner { padding: 40px 20px; }
-  .hero-cta-row { flex-direction: column; width: 100%; }
-  .btn-primary, .btn-secondary { width: 100%; }
-  .stats-row { grid-template-columns: 1fr 1fr; gap: 20px; text-align: center; }
-  .pod-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-link { text-align: left; padding: 12px; background: var(--surface); border: 1px solid var(--border); margin-bottom: 4px;}
   .footer-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .nav-cta { display: none; }
-  .stats-row { grid-template-columns: 1fr; }
-  .pod-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -234,6 +190,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
   <div class="nav-links" id="navLinks">
     <button class="nav-link active" onclick="showPage('home', this)">Home</button>
     <button class="nav-link" onclick="showPage('pricing', this)">Pricing</button>
+    <button class="nav-link" onclick="showPage('cafe', this)">Healthy Cafe</button>
     <button class="nav-link" onclick="showPage('booking', this)">Book a Pod</button>
     <button class="nav-link" onclick="showPage('buddy', this)">StudyBuddy</button>
     <button class="nav-link" onclick="showPage('secondbook', this)">Secondbook</button>
@@ -247,7 +204,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
 
 <div id="page-home" class="page active">
   <div id="hero-wrap">
-    <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+    <div class="orb orb1"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">
         <div class="hero-badge"><span class="pulse"></span> &nbsp;12 pods available near you · <span>Baku, AZ</span></div>
@@ -270,7 +227,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
 
 <div id="page-pricing" class="page">
   <div class="section">
-    <div class="tag">✦ Plans & Cafeteria</div>
+    <div class="tag">✦ Plans & Passes</div>
     <h2 class="section-title">Simple, transparent pricing</h2>
     <p class="lead">Choose the perfect plan for your study goals. Custom discounts at our Healthy Cafeteria included.</p>
     
@@ -297,8 +254,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
         </div>
         <ul class="price-features">
           <li>Aylıq 10 saat ödənişsiz pod krediti</li>
-          <li>StudyBuddy standart axtarış tapma</li>
-          <li>Sağlam Kafedə (fit-salatlar, quru meyvələr) <strong>10% endirim</strong></li>
+          <li>StudyBuddy standart axtarış sistemi</li>
+          <li>Sağlam Kafedə <strong>10% endirim</strong></li>
         </ul>
         <button class="btn-secondary" style="width:100%" onclick="showPage('booking')">Subscribe</button>
       </div>
@@ -313,7 +270,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
           <li>Aylıq 25 saat pod krediti</li>
           <li>Prioritetli rezervasiya sistemi</li>
           <li>StudyBuddy Premium (Dəqiq Match)</li>
-          <li>Sağlam Kafedə (Təbii şirələr və fit-menyu) <strong>20% endirim</strong></li>
+          <li>Sağlam Kafedə <strong>20% endirim</strong></li>
         </ul>
         <button class="btn-primary" style="width:100%" onclick="showPage('booking')">Subscribe Now</button>
       </div>
@@ -328,7 +285,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
           <li>Aylıq 50 saat pod krediti</li>
           <li>24/7 Podlara gecə keçid icazəsi</li>
           <li>Xüsusi şəxsi dolab (Locker) təhvil</li>
-          <li>Sağlam Kafedə <strong>Hər gün 1 ödənişsiz filter qəhvə və ya yerli bitki çayı</strong> + 25% endirim</li>
+          <li>Sağlam Kafedə <strong>Hər gün 1 ödənişsiz filter qəhvə / çay</strong> + 25% endirim</li>
         </ul>
         <button class="btn-secondary" style="width:100%" onclick="showPage('booking')">Go Ultimate</button>
       </div>
@@ -336,14 +293,72 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
   </div>
 </div>
 
+<div id="page-cafe" class="page">
+  <div class="section">
+    <div class="tag">✦ Healthy Cafeteria</div>
+    <h2 class="section-title">Fuel Your Brain Healthy</h2>
+    <p class="lead">Uzun və gərgin dərs sessiyalarında enerjini tam təbii, şəkərsiz və tələbə büdcəsinə uyğun seçimlərlə bərpa et.</p>
+    
+    <div class="cafe-grid">
+      <div class="cafe-card">
+        <div class="cafe-item-header">
+          <div class="cafe-item-name">Filter Qəhvə</div>
+          <div class="cafe-item-price">₼2.50</div>
+        </div>
+        <div class="cafe-item-desc">Yuxunu qaçıran, diqqəti maksimuma çatdıran təbii 100% Arabika.</div>
+        <div class="cafe-tag">Focus Fuel</div>
+      </div>
+
+      <div class="cafe-card">
+        <div class="cafe-item-header">
+          <div class="cafe-item-name">Milli Çay (Dəstgah)</div>
+          <div class="cafe-item-price">₼2.00</div>
+        </div>
+        <div class="cafe-item-desc">Kiçik armudu stəkanda kəklikotu və ya nanə ilə dəmlənmiş yerli çay.</div>
+        <div class="cafe-tag">Traditional</div>
+      </div>
+
+      <div class="cafe-card">
+        <div class="cafe-item-header">
+          <div class="cafe-item-name">Təbii Portağal Şirəsi</div>
+          <div class="cafe-item-price">₼3.50</div>
+        </div>
+        <div class="cafe-item-desc">Heç bir şəkər əlavə edilmədən, gözünün önündə sıxılan təzə vitamin deposu.</div>
+        <div class="cafe-tag">C-Vitamin Boost</div>
+      </div>
+
+      <div class="cafe-card">
+        <div class="cafe-item-header">
+          <div class="cafe-item-name">Fit Tələbə Salatı</div>
+          <div class="cafe-item-price">₼4.50</div>
+        </div>
+        <div class="cafe-item-desc">Toyuq filesi, qara kinoa, təzə göyərtilər və yüngül zeytun yağı sousu ilə.</div>
+        <div class="cafe-tag">Healthy Lunch</div>
+      </div>
+
+      <div class="cafe-card">
+        <div class="cafe-item-header">
+          <div class="cafe-item-name">Quru Meyvə & Qoz-Fındıq Mix</div>
+          <div class="cafe-item-price">₼2.00</div>
+        </div>
+        <div class="cafe-item-desc">Beyin funksiyalarını sürətləndirən qoz, badam, fındıq və kişmiş qarışığı.</div>
+        <div class="cafe-tag">Brain Snack</div>
+      </div>
+
+      <div class="cafe-card">
+        <div class="cafe-item-header">
+          <div class="cafe-item-name">Proteinli Yulaf (Oatmeal)</div>
+          <div class="cafe-item-price">₼3.80</div>
+        </div>
+        <div class="cafe-item-desc">Badam südü ilə bişmiş yulaf, üzərində banan dilimləri və fıstıq əzməsi.</div>
+        <div class="cafe-tag">Energy Charge</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="page-booking" class="page">
   <div class="booking-layout">
-    <div class="step-indicator">
-      <div class="step-dot active" id="s1">1</div><div class="step-line"></div>
-      <div class="step-dot" id="s2">2</div><div class="step-line"></div>
-      <div class="step-dot" id="s3">3</div>
-    </div>
-    
     <div class="tag">✦ Reservation</div>
     <h2 class="section-title" style="font-size:32px">Select Your Pod & Time</h2>
     
@@ -362,13 +377,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
       <div class="time-slot" onclick="selectTime(this, '09:00 - 11:00')">09:00</div>
       <div class="time-slot selected" onclick="selectTime(this, '11:00 - 13:00')">11:00</div>
       <div class="time-slot" onclick="selectTime(this, '14:00 - 16:00')">14:00</div>
-      <div class="time-slot" onclick="selectTime(this, '16:00 - 18:00')">16:00</div>
     </div>
 
     <div class="confirm-box">
       <h3 style="font-size:18px; margin-bottom:8px">Booking Summary</h3>
       <p style="font-size:14px; color:var(--text2)" id="bookingSummary">Selected: Standard Pod P-101 at 11:00 - 13:00</p>
-      <button class="btn-primary" style="margin-top:20px; padding:10px 24px" onclick="alert('Pod successfully reserved! Your QR code has been generated.')">Confirm Reservation</button>
+      <button class="btn-primary" style="margin-top:20px; padding:10px 24px" onclick="alert('Pod successfully reserved!')">Confirm Reservation</button>
     </div>
   </div>
 </div>
@@ -377,12 +391,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
   <div class="section">
     <div class="tag">✦ Co-Working</div>
     <h2 class="section-title">Find the Right Partner</h2>
-    <p class="lead">Filter through categories and select the ideal study match to complete assignments together.</p>
+    <p class="lead">Filter through categories and select the ideal study match.</p>
     
     <div class="match-filter" style="margin-top:32px">
       <button class="filter-btn active" onclick="filterBuddies('all', this)">All Majors</button>
       <button class="filter-btn" onclick="filterBuddies('cs', this)">Computer Science</button>
-      <button class="filter-btn" onclick="filterBuddies('med', this)">Medicine</button>
       <button class="filter-btn" onclick="filterBuddies('law', this)">Law (Hüquq)</button>
       <button class="filter-btn" onclick="filterBuddies('biz', this)">Business & Econ</button>
       <button class="filter-btn" onclick="filterBuddies('eng', this)">Engineering</button>
@@ -394,7 +407,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
         <div class="buddy-info">
           <div class="buddy-name">Sabrina A.</div>
           <div class="buddy-meta">Computer Science · 3rd year</div>
-          <div class="buddy-tags"><span class="buddy-tag">Algorithms</span><span class="buddy-tag">Morning</span></div>
+          <div class="buddy-tags"><span class="buddy-tag">Algorithms</span></div>
         </div>
         <div class="match-score">94%</div>
         <button class="match-btn" style="margin-left:16px">Choose</button>
@@ -405,42 +418,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
         <div class="buddy-info">
           <div class="buddy-name">Elnur M.</div>
           <div class="buddy-meta">Mülki Hüquq · 4th year</div>
-          <div class="buddy-tags"><span class="buddy-tag">Konstitusiya</span><span class="buddy-tag">Beynəlxalq Hüquq</span></div>
+          <div class="buddy-tags"><span class="buddy-tag">Konstitusiya</span></div>
         </div>
         <div class="match-score">91%</div>
-        <button class="match-btn" style="margin-left:16px">Choose</button>
-      </div>
-
-      <div class="buddy-card" data-major="biz" onclick="selectPartner(this, 'Aydan H.')">
-        <div class="buddy-avatar" style="background:rgba(236,72,153,.15);color:#f472b6">AH</div>
-        <div class="buddy-info">
-          <div class="buddy-name">Aydan H.</div>
-          <div class="buddy-meta">Finance & Business · 2nd year</div>
-          <div class="buddy-tags"><span class="buddy-tag">Microeconomics</span><span class="buddy-tag">SaaS Marketing</span></div>
-        </div>
-        <div class="match-score">88%</div>
-        <button class="match-btn" style="margin-left:16px">Choose</button>
-      </div>
-
-      <div class="buddy-card" data-major="eng" onclick="selectPartner(this, 'Fərid M.')">
-        <div class="buddy-avatar" style="background:rgba(6,182,212,.15);color:#22d3ee">FM</div>
-        <div class="buddy-info">
-          <div class="buddy-name">Fərid M.</div>
-          <div class="buddy-meta">Mexanika Mühəndisliyi · 3rd year</div>
-          <div class="buddy-tags"><span class="buddy-tag">CAD/SolidWorks</span><span class="buddy-tag">Matlab</span></div>
-        </div>
-        <div class="match-score">95%</div>
-        <button class="match-btn" style="margin-left:16px">Choose</button>
-      </div>
-
-      <div class="buddy-card" data-major="med" onclick="selectPartner(this, 'Leila K.')">
-        <div class="buddy-avatar" style="background:rgba(245,158,11,.15);color:#fbbf24">LK</div>
-        <div class="buddy-info">
-          <div class="buddy-name">Leila K.</div>
-          <div class="buddy-meta">Medicine · 4th year</div>
-          <div class="buddy-tags"><span class="buddy-tag">Biochemistry</span><span class="buddy-tag">Weekends</span></div>
-        </div>
-        <div class="match-score">85%</div>
         <button class="match-btn" style="margin-left:16px">Choose</button>
       </div>
     </div>
@@ -451,16 +431,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
   <div class="section">
     <div class="tag">✦ Marketplace</div>
     <h2 class="section-title">Student Store</h2>
-    <p class="lead">Buy affordable textbooks or sell your old notes safely within the campus community.</p>
+    <p class="lead">Buy affordable textbooks or sell your old notes safely.</p>
     
     <div class="marketplace-filters" style="margin-top:32px">
-      <input type="text" class="search-input" id="bookSearch" placeholder="Search textbooks by title or course code..." oninput="searchBooks()">
+      <input type="text" class="search-input" id="bookSearch" placeholder="Search textbooks..." oninput="searchBooks()">
     </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:20px" id="booksGrid">
-      <div class="book-card" data-title="algorithms"><div class="book-cover" style="background:rgba(99,102,241,.1)">📘</div><div class="book-info"><div class="book-title">Algorithms, 4th Ed.</div><div class="book-course">CS301</div><div class="book-price-row"><span class="book-price">₼14</span><span class="book-orig">₼89</span></div></div></div>
-      <div class="book-card" data-title="chemistry"><div class="book-cover" style="background:rgba(16,185,129,.1)">📗</div><div class="book-info"><div class="book-title">Organic Chemistry</div><div class="book-course">CHEM202</div><div class="book-price-row"><span class="book-price">₼22</span><span class="book-orig">₼110</span></div></div></div>
-      <div class="book-card" data-title="microeconomics"><div class="book-cover" style="background:rgba(245,158,11,.1)">📙</div><div class="book-info"><div class="book-title">Microeconomics 101</div><div class="book-course">ECON101</div><div class="book-price-row"><span class="book-price">₼9</span><span class="book-orig">₼45</span></div></div></div>
+      <div class="book-card" data-title="algorithms"><div class="book-cover" style="background:rgba(99,102,241,.1)">📘</div><div class="book-info"><div class="book-title">Algorithms, 4th Ed.</div><div class="book-price-row"><span class="book-price">₼14</span></div></div></div>
     </div>
   </div>
 </div>
@@ -469,41 +447,16 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
   <div class="dash-layout">
     <div class="dash-sidebar">
       <div class="dash-nav-item active">📊 Overview</div>
-      <div class="dash-nav-item" onclick="showPage('booking')">🔒 My Bookings</div>
     </div>
     <div class="dash-main">
       <h2 class="dash-title">Welcome Back, Founder!</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px; margin-bottom:40px">
-        <div class="metric-card"><div class="metric-label">Total Focus Time</div><div class="metric-value">24.5h</div><div style="font-size:12px;color:var(--green)">+3.2h this week</div></div>
-        <div class="metric-card"><div class="metric-label">Current Streak</div><div class="metric-value">5 Days</div><div style="font-size:12px;color:var(--amber)">Keep it up!</div></div>
-        <div class="metric-card"><div class="metric-label">Cafeteria Perks</div><div class="metric-value">Active</div><div style="font-size:12px;color:var(--accent3)">Based on your plan</div></div>
-      </div>
-
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px">
-        <div class="card" style="text-align:center">
-          <h3 style="font-size:16px; margin-bottom:16px">Active Session Timer</h3>
-          <div class="timer-circle"><div class="timer-inner"><span style="font-size:24px">42:15</span><span style="font-size:11px;color:var(--text3)">Remaining</span></div></div>
-          <p style="font-size:13px; color:var(--text2); margin-top:16px">Pod P-101 · Session ends at 13:00</p>
-        </div>
-        <div class="card">
-          <h3 style="font-size:16px; margin-bottom:12px">Monthly Goals</h3>
-          <p style="font-size:14px; color:var(--text2)">Focus Goal: 30 hours</p>
-          <div class="progress-bar"><div class="progress-fill"></div></div>
-          <p style="font-size:12px; color:var(--text3); margin-top:6px">65% of your monthly goal completed</p>
-        </div>
-      </div>
+      <div class="metric-card"><div class="metric-label">Total Focus Time</div><div class="metric-value">24.5h</div></div>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-grid">
-      <div><div class="footer-brand">Stupod</div><p class="footer-desc">Next-generation quiet study ecosystems and collaborative resource network built entirely for students.</p></div>
-      <div><div class="footer-heading">Product</div><ul class="footer-links"><li><a>Pods</a></li><li><a onclick="showPage('pricing')">Pricing</a></li></ul></div>
-      <div><div class="footer-heading">Network</div><ul class="footer-links"><li><a onclick="showPage('buddy')">StudyBuddy</a></li><li><a onclick="showPage('secondbook')">Secondbook</a></li></ul></div>
-      <div><div class="footer-heading">Company</div><ul class="footer-links"><li><a>About Us</a></li></ul></div>
-    </div>
     <div class="footer-bottom">
       <div class="footer-copy">&copy; 2026 STUPOD Inc. All rights reserved.</div>
     </div>
@@ -511,7 +464,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
 </footer>
 
 <script>
-  // Single Page Application Router
   function showPage(pageId, element) {
     document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
     const activePage = document.getElementById('page-' + pageId);
@@ -550,44 +502,18 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
     document.getElementById('bookingSummary').innerText = `Selected: ${selectedPod} at ${selectedTimeSlot}`;
   }
 
-  function searchBooks() {
-    let query = document.getElementById('bookSearch').value.toLowerCase();
-    document.querySelectorAll('.book-card').forEach(card => {
-      let title = card.getAttribute('data-title');
-      if(title.includes(query)) card.style.display = "flex";
+  function filterBuddies(major, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.buddy-card').forEach(card => {
+      if(major === 'all' || card.getAttribute('data-major') === major) card.style.display = "flex";
       else card.style.display = "none";
     });
   }
 
-  // StudyBuddy Dinamik Filtrləmə Məntiqi
-  function filterBuddies(major, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    
-    document.querySelectorAll('.buddy-card').forEach(card => {
-      if(major === 'all' || card.getAttribute('data-major') === major) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
-
-  // Tərəfdaş Seçim (Match) Sistemi
   function selectPartner(card, name) {
-    document.querySelectorAll('.buddy-card').forEach(c => {
-      c.classList.remove('selected-partner');
-      c.querySelector('.match-btn').innerText = "Choose";
-    });
-    
-    card.classList.add('selected-partner');
-    card.querySelector('.match-btn').innerText = "Matched! ✓";
-    
-    setTimeout(() => {
-      alert(`Superb choice! A study match request has been successfully sent to ${name}.`);
-    }, 150);
+    alert(`Request sent to ${name}`);
   }
 </script>
-
 </body>
 </html>

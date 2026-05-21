@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Stupod - Study Pods & Student Ecosystem</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
 <style>
 /* =========================================
@@ -231,215 +230,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
 /* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .page.active .hero-inner,.page.active .section{animation:fadeUp .4s ease both}
-
-
-/* =========================================
-   FULL DASHBOARD STYLES (Integrated)
-   ========================================= */
-.fd-wrapper {
-  /* Scoped Variables targeting Startup's Dark Theme */
-  --card: var(--surface);
-  --card2: var(--surface2);
-  --txt: var(--text);
-  --txt2: var(--text2);
-  --txt3: var(--text3);
-  --border: var(--border);
-  --border2: var(--border2);
-  
-  --accent: #6366f1;
-  --accent-l: rgba(99,102,241,.12);
-  --green: #22c55e;
-  --green-l: rgba(34,197,94,.12);
-  --amber: #f59e0b;
-  --amber-l: rgba(245,158,11,.12);
-  --rose: #f43f5e;
-  --rose-l: rgba(244,63,94,.12);
-  --teal: #14b8a6;
-  --teal-l: rgba(20,184,166,.12);
-  --r: var(--radius);
-  --rs: var(--radius-sm);
-  --font-sans: var(--font-body);
-
-  font-family: var(--font-sans);
-  color: var(--txt);
-  padding: 32px 16px;
-  max-width: 452px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.fd-sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-
-/* UPGRADE BANNER */
-.fd-wrapper .upgrade-bar{background:linear-gradient(90deg,rgba(99,102,241,.18),rgba(139,92,246,.12));border:0.5px solid rgba(99,102,241,.3);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:10px;margin:0 0 16px;cursor:pointer}
-.fd-wrapper .upgrade-bar-txt{flex:1;font-size:12px;color:var(--txt2);line-height:1.4}
-.fd-wrapper .upgrade-bar-txt strong{color:#818cf8;font-weight:500}
-.fd-wrapper .upgrade-bar-btn{background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:6px 12px;font-size:11px;font-weight:500;cursor:pointer;white-space:nowrap;font-family:var(--font-sans)}
-
-/* HEADER */
-.fd-wrapper .header{padding:16px 0 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.fd-wrapper .fd-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent-l);border:1.5px solid rgba(99,102,241,.4);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:14px;color:var(--accent)}
-.fd-wrapper .user-name{font-size:15px;font-weight:500}
-.fd-wrapper .badge-pro{display:inline-flex;align-items:center;gap:4px;background:rgba(99,102,241,.13);color:#818cf8;border:0.5px solid rgba(99,102,241,.3);border-radius:100px;padding:2px 8px;font-size:10px;font-weight:500;margin-top:3px}
-.fd-wrapper .notif{width:36px;height:36px;border-radius:var(--rs);border:0.5px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:var(--txt2)}
-.fd-wrapper .notif-dot{width:7px;height:7px;border-radius:50%;background:var(--rose);position:absolute;top:7px;right:7px;border:1.5px solid var(--card)}
-
-/* SECTIONS */
-.fd-wrapper .fd-section{margin-bottom:4px}
-.fd-wrapper .sec-label{font-size:11px;font-weight:500;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;justify-content:space-between;margin:18px 0 10px}
-.fd-wrapper .sec-link{font-size:11px;color:var(--accent);text-transform:none;letter-spacing:0;cursor:pointer;border:none;background:none;font-family:var(--font-sans)}
-
-/* STATS */
-.fd-wrapper .stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}
-.fd-wrapper .stat-card{background:var(--card2);border-radius:var(--rs);padding:14px}
-.fd-wrapper .stat-lbl{font-size:11px;color:var(--txt3);margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.fd-wrapper .stat-val{font-size:22px;font-weight:500;line-height:1}
-.fd-wrapper .stat-unit{font-size:13px;color:var(--txt3)}
-.fd-wrapper .stat-sub{font-size:11px;margin-top:3px}
-.fd-wrapper .up{color:var(--green)}.fd-wrapper .down{color:var(--rose)}.fd-wrapper .muted{color:var(--txt3)}
-
-/* GOAL RING */
-.fd-wrapper .goal-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;display:flex;align-items:center;gap:16px;margin-bottom:14px}
-.fd-wrapper .ring-wrap{position:relative;width:72px;height:72px;flex-shrink:0}
-.fd-wrapper .ring-wrap svg{transform:rotate(-90deg)}
-.fd-wrapper .ring-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.fd-wrapper .ring-pct{font-size:14px;font-weight:500}
-.fd-wrapper .ring-sub{font-size:9px;color:var(--txt3)}
-.fd-wrapper .goal-info{flex:1}
-.fd-wrapper .goal-title{font-size:13px;font-weight:500;margin-bottom:4px}
-.fd-wrapper .goal-bar-bg{background:var(--card2);border-radius:100px;height:6px;margin-bottom:6px;overflow:hidden}
-.fd-wrapper .goal-bar-fill{height:6px;border-radius:100px;background:var(--accent);transition:width .3s}
-.fd-wrapper .goal-edit{font-size:11px;color:var(--accent);cursor:pointer;background:none;border:none;font-family:var(--font-sans)}
-
-/* STREAK */
-.fd-wrapper .streak-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.fd-wrapper .streak-days{display:flex;gap:5px}
-.fd-wrapper .day-dot{width:30px;height:30px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500}
-.fd-wrapper .d-done{background:var(--accent-l);color:#818cf8}
-.fd-wrapper .d-today{background:var(--accent);color:#fff}
-.fd-wrapper .d-miss{background:var(--card2);color:var(--txt3)}
-.fd-wrapper .streak-right{text-align:right}
-.fd-wrapper .streak-num{font-size:28px;font-weight:500;line-height:1}
-.fd-wrapper .streak-lbl{font-size:10px;color:var(--txt3);margin-top:2px}
-
-/* CHART */
-.fd-wrapper .chart-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px}
-.fd-wrapper .chart-legend{display:flex;gap:14px;margin:6px 0 12px}
-.fd-wrapper .leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt2)}
-.fd-wrapper .leg-dot{width:8px;height:8px;border-radius:2px}
-
-/* POMODORO */
-.fd-wrapper .timer-card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:20px 16px;text-align:center;margin-bottom:14px}
-.fd-wrapper .timer-ring-wrap{position:relative;width:96px;height:96px;margin:0 auto 12px}
-.fd-wrapper .timer-ring-wrap svg{transform:rotate(-90deg)}
-.fd-wrapper .timer-time{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:17px;font-weight:500}
-.fd-wrapper .timer-controls{display:flex;gap:8px;justify-content:center;margin-top:12px}
-.fd-wrapper .timer-btn{border:0.5px solid var(--border);border-radius:var(--rs);padding:7px 16px;font-size:12px;cursor:pointer;background:var(--card2);color:var(--txt);font-family:var(--font-sans)}
-.fd-wrapper .timer-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.fd-wrapper .mode-tabs{display:flex;gap:6px;justify-content:center;margin-bottom:14px}
-.fd-wrapper .mode-tab{background:var(--card2);border:0.5px solid var(--border);border-radius:100px;padding:4px 12px;font-size:11px;cursor:pointer;color:var(--txt3);font-family:var(--font-sans)}
-.fd-wrapper .mode-tab.active{background:var(--accent-l);color:#818cf8;border-color:rgba(99,102,241,.3)}
-.fd-wrapper .session-dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
-.fd-wrapper .sess-dot{width:8px;height:8px;border-radius:50%}
-.fd-wrapper .sess-done-dot{background:var(--accent)}
-.fd-wrapper .sess-empty-dot{background:var(--card2);border:0.5px solid var(--border)}
-
-/* BOOKINGS */
-.fd-wrapper .booking-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-.fd-wrapper .booking-item{background:var(--card);border:0.5px solid var(--border);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:12px}
-.fd-wrapper .b-icon{width:34px;height:34px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.fd-wrapper .b-active{background:var(--green-l);color:var(--green)}
-.fd-wrapper .b-upcoming{background:var(--accent-l);color:#818cf8}
-.fd-wrapper .b-done{background:var(--card2);color:var(--txt3)}
-.fd-wrapper .b-name{font-size:13px;font-weight:500}
-.fd-wrapper .b-meta{font-size:11px;color:var(--txt3);margin-top:1px}
-.fd-wrapper .b-right{margin-left:auto;text-align:right}
-.fd-wrapper .b-price{font-size:13px;font-weight:500}
-.fd-wrapper .b-status{font-size:10px;margin-top:2px}
-.fd-wrapper .s-green{color:var(--green)}.fd-wrapper .s-indigo{color:#818cf8}.fd-wrapper .s-gray{color:var(--txt3)}
-
-/* FAV PODS */
-.fd-wrapper .fav-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px}
-.fd-wrapper .fav-pod{background:var(--card);border:0.5px solid var(--border);border-radius:var(--rs);padding:12px;cursor:pointer;transition:border-color .15s}
-.fd-wrapper .fav-pod:hover{border-color:rgba(99,102,241,.4)}
-.fd-wrapper .fav-pod-name{font-size:13px;font-weight:500;margin-bottom:2px}
-.fd-wrapper .fav-pod-meta{font-size:11px;color:var(--txt3)}
-.fd-wrapper .fav-pod-badge{display:inline-block;margin-top:6px;font-size:10px;border-radius:100px;padding:2px 8px}
-.fd-wrapper .fav-avail{background:var(--green-l);color:var(--green)}
-.fd-wrapper .fav-busy{background:var(--card2);color:var(--txt3)}
-.fd-wrapper .fav-star{float:right;color:var(--amber);font-size:13px}
-
-/* CAFE */
-.fd-wrapper .cafe-wallet{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:8px;display:flex;align-items:center;gap:14px}
-.fd-wrapper .cafe-ico{width:44px;height:44px;border-radius:var(--rs);background:var(--amber-l);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.fd-wrapper .wallet-bal{font-size:24px;font-weight:500}
-.fd-wrapper .wallet-lbl{font-size:11px;color:var(--txt3)}
-.fd-wrapper .perks-row{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
-.fd-wrapper .perk-badge{font-size:10px;border-radius:100px;padding:2px 8px;border:0.5px solid}
-.fd-wrapper .pb-amber{background:var(--amber-l);color:#fbbf24;border-color:rgba(245,158,11,.3)}
-.fd-wrapper .pb-green{background:var(--green-l);color:#4ade80;border-color:rgba(34,197,94,.3)}
-.fd-wrapper .pb-indigo{background:var(--accent-l);color:#818cf8;border-color:rgba(99,102,241,.3)}
-.fd-wrapper .topup-btn{margin-left:auto;width:32px;height:32px;border-radius:50%;border:0.5px solid var(--border2);background:var(--card2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--accent);flex-shrink:0}
-
-.fd-wrapper .cafe-history{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.fd-wrapper .cafe-row{background:var(--card);border:0.5px solid var(--border);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:10px}
-.fd-wrapper .cafe-emoji{font-size:18px;flex-shrink:0}
-.fd-wrapper .cafe-item{font-size:13px;font-weight:500}
-.fd-wrapper .cafe-date{font-size:11px;color:var(--txt3);margin-top:1px}
-.fd-wrapper .cafe-amt{margin-left:auto;font-size:13px;font-weight:500}
-.fd-wrapper .cafe-disc{font-size:10px;color:var(--green);text-align:right;margin-top:1px}
-
-/* WISHLIST */
-.fd-wrapper .wish-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-.fd-wrapper .wish-item{background:var(--card);border:0.5px solid var(--border);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:12px}
-.fd-wrapper .wish-cover{width:36px;height:44px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.fd-wrapper .wish-title{font-size:13px;font-weight:500}
-.fd-wrapper .wish-meta{font-size:11px;color:var(--txt3);margin-top:1px}
-.fd-wrapper .wish-right{margin-left:auto;text-align:right}
-.fd-wrapper .wish-price{font-size:14px;font-weight:500;color:var(--accent)}
-.fd-wrapper .wish-orig{font-size:10px;color:var(--txt3);text-decoration:line-through}
-.fd-wrapper .wish-buy{background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:5px 10px;font-size:10px;font-weight:500;cursor:pointer;margin-top:4px;font-family:var(--font-sans)}
-
-/* BUDDY */
-.fd-wrapper .buddy-widget{background:var(--card);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
-.fd-wrapper .buddy-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:0.5px solid var(--border)}
-.fd-wrapper .buddy-row:last-child{border-bottom:none}
-.fd-wrapper .buddy-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
-.fd-wrapper .buddy-name{font-size:13px;font-weight:500}
-.fd-wrapper .buddy-field{font-size:11px;color:var(--txt3)}
-.fd-wrapper .buddy-chip{margin-left:auto;font-size:10px;border-radius:100px;padding:3px 8px;cursor:pointer;border:0.5px solid;white-space:nowrap}
-.fd-wrapper .chip-match{background:var(--green-l);color:var(--green);border-color:rgba(34,197,94,.3)}
-.fd-wrapper .chip-req{background:var(--accent-l);color:#818cf8;border-color:rgba(99,102,241,.3)}
-.fd-wrapper .chip-pend{background:var(--amber-l);color:#fbbf24;border-color:rgba(245,158,11,.3)}
-
-/* QUICK ACTIONS */
-.fd-wrapper .quick-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px}
-.fd-wrapper .qa-btn{background:var(--card);border:0.5px solid var(--border);border-radius:var(--rs);padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer}
-.fd-wrapper .qa-btn:active{background:var(--card2)}
-.fd-wrapper .qa-lbl{font-size:11px;color:var(--txt2);font-weight:500;text-align:center}
-
-/* GOAL MODAL OVERLAY */
-.fd-wrapper .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:999}
-.fd-wrapper .modal-overlay.show{display:flex}
-.fd-wrapper .modal{background:var(--card);border:0.5px solid var(--border2);border-radius:var(--r);padding:24px;width:320px;max-width:calc(100vw - 32px)}
-.fd-wrapper .modal-title{font-size:15px;font-weight:500;margin-bottom:16px}
-.fd-wrapper .modal-input{width:100%;border:0.5px solid var(--border2);border-radius:var(--rs);padding:10px 12px;font-size:14px;background:var(--card2);color:var(--txt);font-family:var(--font-sans);outline:none}
-.fd-wrapper .modal-actions{display:flex;gap:8px;margin-top:16px}
-.fd-wrapper .modal-save{flex:1;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);padding:10px;font-size:13px;cursor:pointer;font-family:var(--font-sans)}
-.fd-wrapper .modal-cancel{border:0.5px solid var(--border2);border-radius:var(--rs);padding:10px 16px;font-size:13px;cursor:pointer;background:none;color:var(--txt);font-family:var(--font-sans)}
-
-/* NOTIF PANEL */
-.fd-wrapper .notif-panel{position:fixed;top:0;right:0;width:300px;max-width:100vw;height:100vh;background:var(--card);border-left:0.5px solid var(--border2);z-index:998;transform:translateX(100%);transition:transform .25s;padding:20px;overflow-y:auto}
-.fd-wrapper .notif-panel.show{transform:translateX(0)}
-.fd-wrapper .notif-panel-title{font-size:15px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
-.fd-wrapper .notif-item{border-bottom:0.5px solid var(--border);padding:12px 0;font-size:13px;line-height:1.5}
-.fd-wrapper .notif-time{font-size:11px;color:var(--txt3);margin-top:4px}
-.fd-wrapper .notif-close{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:18px;font-family:var(--font-sans)}
-
-/* REMINDER BANNER */
-.fd-wrapper .reminder-banner{background:rgba(99,102,241,.08);border:0.5px solid rgba(99,102,241,.25);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:12px;color:var(--txt2)}
-.fd-wrapper .reminder-banner i{color:#818cf8;font-size:16px;flex-shrink:0}
-
 </style>
 </head>
 <body>
@@ -455,7 +245,6 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
     <button class="nav-link" onclick="showPage('buddy');setActive(this)">StudyBuddy</button>
     <button class="nav-link" onclick="showPage('secondbook');setActive(this)">Secondbook</button>
     <button class="nav-link" onclick="showPage('dashboard');setActive(this)">Dashboard</button>
-    <button class="nav-link" style="color:var(--accent3)" onclick="showPage('full-dashboard');setActive(this)">Full App (New)</button>
   </div>
   <button class="nav-cta" onclick="showPage('booking')">Book Now →</button>
 </nav>
@@ -914,524 +703,228 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 32p
           <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
         </div>
       </div>
-      <div class="dash-nav-item active"><span class="icon">📊</span> Overview</div>
-      <div class="dash-nav-item"><span class="icon">📅</span> My Bookings</div>
-      <div class="dash-nav-item"><span class="icon">⏱</span> Focus Timer</div>
-      <div class="dash-nav-item"><span class="icon">🤝</span> My Buddies</div>
-      <div class="dash-nav-item"><span class="icon">🏆</span> Achievements</div>
-      <div class="dash-nav-item"><span class="icon">📚</span> Secondbook</div>
-      <div class="dash-nav-item"><span class="icon">⚙️</span> Settings</div>
+      <div class="dash-nav-item active" onclick="showDashPage('overview', this)"><span class="icon">📊</span> Overview</div>
+      <div class="dash-nav-item" onclick="showDashPage('bookings', this)"><span class="icon">📅</span> My Bookings</div>
+      <div class="dash-nav-item" onclick="showDashPage('timer', this)"><span class="icon">⏱</span> Focus Timer</div>
+      <div class="dash-nav-item" onclick="showDashPage('buddies', this)"><span class="icon">🤝</span> My Buddies</div>
+      <div class="dash-nav-item" onclick="showDashPage('achievements', this)"><span class="icon">🏆</span> Achievements</div>
+      <div class="dash-nav-item" onclick="showPage('secondbook'); setActive(document.querySelectorAll('.nav-link')[4])"><span class="icon">📚</span> Secondbook</div>
+      <div class="dash-nav-item" onclick="showDashPage('settings', this)"><span class="icon">⚙️</span> Settings</div>
     </div>
 
     <div class="dash-main">
-      <div class="dash-title">Good morning, Aida 👋</div>
+      
+      <div id="dash-overview" class="dash-page active">
+        <div class="dash-title">Good morning, Aida 👋</div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:28px">
-        <div class="metric-card">
-          <div class="metric-label">Hours this week</div>
-          <div class="metric-value">18.4</div>
-          <div class="metric-change metric-up">↑ +3.2h vs last week</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:28px">
+          <div class="metric-card">
+            <div class="metric-label">Hours this week</div>
+            <div class="metric-value">18.4</div>
+            <div class="metric-change metric-up">↑ +3.2h vs last week</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Current streak</div>
+            <div class="metric-value">🔥 14</div>
+            <div class="metric-change" style="color:var(--text3)">days in a row</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Sessions done</div>
+            <div class="metric-value">47</div>
+            <div class="metric-change metric-up">↑ +8 this month</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Focus score</div>
+            <div class="metric-value">84%</div>
+            <div class="metric-change metric-up">↑ +5% vs avg</div>
+          </div>
         </div>
-        <div class="metric-card">
-          <div class="metric-label">Current streak</div>
-          <div class="metric-value">🔥 14</div>
-          <div class="metric-change" style="color:var(--text3)">days in a row</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Sessions done</div>
-          <div class="metric-value">47</div>
-          <div class="metric-change metric-up">↑ +8 this month</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Focus score</div>
-          <div class="metric-value">84%</div>
-          <div class="metric-change metric-up">↑ +5% vs avg</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="card">
+            <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:20px">⏱ Focus Timer</div>
+            <div class="timer-circle" style="--prog:65%">
+              <div class="timer-inner">
+                <div style="font-family:var(--font-head);font-size:22px;font-weight:700" id="timer-display">25:00</div>
+                <div style="font-size:11px;color:var(--text3)">Pomodoro</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:20px;justify-content:center">
+              <button class="btn-primary" style="padding:8px 20px;font-size:13px" id="timer-btn" onclick="toggleTimer()">▶ Start</button>
+              <button class="btn-secondary" style="padding:8px 16px;font-size:13px" onclick="resetTimer()">↺</button>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
+              <button class="filter-btn active" onclick="setTimerMode(25,'Pomodoro',this)">25 min</button>
+              <button class="filter-btn" onclick="setTimerMode(15,'Short break',this)">15 min</button>
+              <button class="filter-btn" onclick="setTimerMode(5,'Break',this)">5 min</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px">📅 Upcoming sessions</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:14px;font-weight:500">Pod A3 · City Campus</div>
+                  <div style="font-size:12px;color:var(--text3);margin-top:2px">Today · 14:00 – 16:00</div>
+                </div>
+                <span class="badge badge-green">In 2h</span>
+              </div>
+              <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-size:14px;font-weight:500">Study Room B · Univ. Ave</div>
+                  <div style="font-size:12px;color:var(--text3);margin-top:2px">Tomorrow · 09:00 – 11:00</div>
+                </div>
+                <span class="badge badge-indigo">Confirmed</span>
+              </div>
+            </div>
+            <button class="btn-secondary" style="width:100%;margin-top:16px;justify-content:center;font-size:13px" onclick="showPage('booking')">+ New Booking</button>
+          </div>
+
+          <div class="card" style="grid-column:1/-1">
+            <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px">🏆 Achievements</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px">
+              <div class="achievement earned"><div class="ach-icon">🔥</div><div class="ach-name">Streak Master</div><div class="ach-desc">14 day streak</div></div>
+              <div class="achievement earned"><div class="ach-icon">⏱</div><div class="ach-name">Time Lord</div><div class="ach-desc">100h total focus</div></div>
+              <div class="achievement earned"><div class="ach-icon">🤝</div><div class="ach-name">Buddy Up</div><div class="ach-desc">First match made</div></div>
+              <div class="achievement earned"><div class="ach-icon">📚</div><div class="ach-name">Bookworm</div><div class="ach-desc">5 books sold</div></div>
+              <div class="achievement locked"><div class="ach-icon">🌟</div><div class="ach-name">Elite Scholar</div><div class="ach-desc">30 day streak</div></div>
+              <div class="achievement locked"><div class="ach-icon">🏅</div><div class="ach-name">Century</div><div class="ach-desc">100 sessions</div></div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-        <div class="card">
-          <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:20px">⏱ Focus Timer</div>
-          <div class="timer-circle" style="--prog:65%">
-            <div class="timer-inner">
-              <div style="font-family:var(--font-head);font-size:22px;font-weight:700" id="timer-display">25:00</div>
-              <div style="font-size:11px;color:var(--text3)">Pomodoro</div>
+      <div id="dash-bookings" class="dash-page" style="display:none">
+        <div class="dash-title">My Bookings</div>
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:800px">
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:20px">
+            <div>
+              <h3 style="font-size:16px;font-weight:500;color:var(--text)">Pod A3 · City Campus</h3>
+              <p style="font-size:13px;color:var(--text2);margin-top:4px">Today · 14:00 – 16:00</p>
+            </div>
+            <div style="text-align:right">
+              <span class="badge badge-green" style="margin-bottom:8px">In 2h</span>
+              <div><button class="btn-secondary" style="padding:6px 12px;font-size:12px">Cancel</button></div>
             </div>
           </div>
-          <div style="display:flex;gap:8px;margin-top:20px;justify-content:center">
-            <button class="btn-primary" style="padding:8px 20px;font-size:13px" id="timer-btn" onclick="toggleTimer()">▶ Start</button>
-            <button class="btn-secondary" style="padding:8px 16px;font-size:13px" onclick="resetTimer()">↺</button>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:12px;justify-content:center">
-            <button class="filter-btn" onclick="setTimerMode(25,'Pomodoro')">25 min</button>
-            <button class="filter-btn" onclick="setTimerMode(15,'Short break')">15 min</button>
-            <button class="filter-btn" onclick="setTimerMode(5,'Break')">5 min</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px">📅 Upcoming sessions</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-size:14px;font-weight:500">Pod A3 · City Campus</div>
-                <div style="font-size:12px;color:var(--text3);margin-top:2px">Today · 14:00 – 16:00</div>
-              </div>
-              <span class="badge badge-green">In 2h</span>
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:20px">
+            <div>
+              <h3 style="font-size:16px;font-weight:500;color:var(--text)">Study Room B · Univ. Ave</h3>
+              <p style="font-size:13px;color:var(--text2);margin-top:4px">Tomorrow · 09:00 – 11:00</p>
             </div>
-            <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div style="font-size:14px;font-weight:500">Study Room B · Univ. Ave</div>
-                <div style="font-size:12px;color:var(--text3);margin-top:2px">Tomorrow · 09:00 – 11:00</div>
-              </div>
-              <span class="badge badge-indigo">Confirmed</span>
+            <div style="text-align:right">
+              <span class="badge badge-indigo" style="margin-bottom:8px">Confirmed</span>
+              <div><button class="btn-secondary" style="padding:6px 12px;font-size:12px">Cancel</button></div>
             </div>
           </div>
-          <button class="btn-secondary" style="width:100%;margin-top:16px;justify-content:center;font-size:13px" onclick="showPage('booking')">+ New Booking</button>
-        </div>
-
-        <div class="card" style="grid-column:1/-1">
-          <div style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:16px">🏆 Achievements</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px">
-            <div class="achievement earned"><div class="ach-icon">🔥</div><div class="ach-name">Streak Master</div><div class="ach-desc">14 day streak</div></div>
-            <div class="achievement earned"><div class="ach-icon">⏱</div><div class="ach-name">Time Lord</div><div class="ach-desc">100h total focus</div></div>
-            <div class="achievement earned"><div class="ach-icon">🤝</div><div class="ach-name">Buddy Up</div><div class="ach-desc">First match made</div></div>
-            <div class="achievement earned"><div class="ach-icon">📚</div><div class="ach-name">Bookworm</div><div class="ach-desc">5 books sold</div></div>
-            <div class="achievement locked"><div class="ach-icon">🌟</div><div class="ach-name">Elite Scholar</div><div class="ach-desc">30 day streak</div></div>
-            <div class="achievement locked"><div class="ach-icon">🏅</div><div class="ach-name">Century</div><div class="ach-desc">100 sessions</div></div>
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:20px;opacity:0.6">
+            <div>
+              <h3 style="font-size:16px;font-weight:500;color:var(--text)">Pod C1 · Central Blvd</h3>
+              <p style="font-size:13px;color:var(--text2);margin-top:4px">18 May · 10:00 – 12:00</p>
+            </div>
+            <div style="text-align:right">
+              <span class="badge" style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);margin-bottom:8px">Completed</span>
+              <div><button class="btn-secondary" style="padding:6px 12px;font-size:12px">Book Again</button></div>
+            </div>
           </div>
         </div>
       </div>
+
+      <div id="dash-timer" class="dash-page" style="display:none">
+        <div class="dash-title">Focus Timer</div>
+        <div class="card" style="text-align:center;padding:60px 20px;max-width:800px">
+          <div class="timer-circle" style="width:240px;height:240px;border-width:5px;--prog:65%;margin:0 auto">
+            <div class="timer-inner" style="width:calc(100% - 20px);height:calc(100% - 20px)">
+              <div style="font-family:var(--font-head);font-size:54px;font-weight:700" id="timer-display-lg">25:00</div>
+              <div style="font-size:14px;color:var(--text3)">Pomodoro</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:40px;justify-content:center">
+            <button class="btn-primary" style="padding:12px 32px;font-size:15px" id="timer-btn-lg" onclick="toggleTimer()">▶ Start</button>
+            <button class="btn-secondary" style="padding:12px 24px;font-size:15px" onclick="resetTimer()">↺ Reset</button>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:24px;justify-content:center">
+            <button class="filter-btn active" onclick="setTimerMode(25,'Pomodoro',this)">25 min</button>
+            <button class="filter-btn" onclick="setTimerMode(15,'Short break',this)">15 min</button>
+            <button class="filter-btn" onclick="setTimerMode(5,'Break',this)">5 min</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="dash-buddies" class="dash-page" style="display:none">
+        <div class="dash-title">My Buddies</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+          <div class="buddy-card" style="cursor:default">
+            <div class="buddy-avatar" style="background:rgba(139,92,246,.15);color:#a78bfa">SA</div>
+            <div class="buddy-info">
+              <div class="buddy-name">Sabrina A.</div>
+              <div class="buddy-meta">Computer Science · Connected</div>
+            </div>
+            <button class="btn-secondary" style="padding:6px 12px;font-size:12px">Message</button>
+          </div>
+          <div class="buddy-card" style="cursor:default">
+            <div class="buddy-avatar" style="background:rgba(16,185,129,.15);color:#34d399">MR</div>
+            <div class="buddy-info">
+              <div class="buddy-name">Marcus R.</div>
+              <div class="buddy-meta">Data Science · Connected</div>
+            </div>
+            <button class="btn-secondary" style="padding:6px 12px;font-size:12px">Message</button>
+          </div>
+        </div>
+        <button class="btn-primary" style="margin-top:24px" onclick="showPage('buddy')">Find more buddies →</button>
+      </div>
+
+      <div id="dash-achievements" class="dash-page" style="display:none">
+        <div class="dash-title">Achievements</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px">
+          <div class="achievement earned"><div class="ach-icon">🔥</div><div class="ach-name">Streak Master</div><div class="ach-desc">14 day streak</div></div>
+          <div class="achievement earned"><div class="ach-icon">⏱</div><div class="ach-name">Time Lord</div><div class="ach-desc">100h total focus</div></div>
+          <div class="achievement earned"><div class="ach-icon">🤝</div><div class="ach-name">Buddy Up</div><div class="ach-desc">First match made</div></div>
+          <div class="achievement earned"><div class="ach-icon">📚</div><div class="ach-name">Bookworm</div><div class="ach-desc">5 books sold</div></div>
+          <div class="achievement locked"><div class="ach-icon">🌟</div><div class="ach-name">Elite Scholar</div><div class="ach-desc">30 day streak</div></div>
+          <div class="achievement locked"><div class="ach-icon">🏅</div><div class="ach-name">Century</div><div class="ach-desc">100 sessions</div></div>
+          <div class="achievement locked"><div class="ach-icon">☕</div><div class="ach-name">Caffeine Junkie</div><div class="ach-desc">Order 10 coffees</div></div>
+          <div class="achievement locked"><div class="ach-icon">🦉</div><div class="ach-name">Night Owl</div><div class="ach-desc">Study past 1 AM</div></div>
+        </div>
+      </div>
+
+      <div id="dash-settings" class="dash-page" style="display:none">
+        <div class="dash-title">Settings</div>
+        <div class="card" style="max-width:600px;display:flex;flex-direction:column;gap:20px">
+          <div>
+            <label style="font-size:13px;color:var(--text2);margin-bottom:6px;display:block">Full Name</label>
+            <input type="text" class="search-input" value="Aida H." style="width:100%"/>
+          </div>
+          <div>
+            <label style="font-size:13px;color:var(--text2);margin-bottom:6px;display:block">Email Address</label>
+            <input type="email" class="search-input" value="aida.h@student.edu" style="width:100%"/>
+          </div>
+          <div>
+            <label style="font-size:13px;color:var(--text2);margin-bottom:6px;display:block">Plan</label>
+            <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-xs);padding:10px 14px">
+              <span style="font-size:14px;font-weight:500;color:var(--text)">Student Plan</span>
+              <button class="btn-secondary" style="padding:4px 10px;font-size:12px" onclick="showPage('pricing')">Upgrade</button>
+            </div>
+          </div>
+          <div>
+            <label style="font-size:13px;color:var(--text2);margin-bottom:8px;display:block">Notification Preferences</label>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--accent)"/> <span style="font-size:14px;color:var(--text)">Booking reminders</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="checkbox" checked style="width:16px;height:16px;accent-color:var(--accent)"/> <span style="font-size:14px;color:var(--text)">StudyBuddy requests</span>
+            </div>
+          </div>
+          <button class="btn-primary" style="width:fit-content;margin-top:10px">Save Changes</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
-
-<div id="page-full-dashboard" class="page">
-  <div class="fd-wrapper">
-    <h2 class="fd-sr-only">Stupod full dashboard with stats, goal tracker, streak, pomodoro, bookings, favorites, cafe wallet, wishlist and study buddies</h2>
-
-    <div class="upgrade-bar" onclick="sendPrompt('I want to upgrade my Stupod plan to Ultimate Pass')">
-      <i class="ti ti-alert-circle" aria-hidden="true" style="font-size:18px;color:#818cf8;flex-shrink:0"></i>
-      <div class="upgrade-bar-txt">Yalnız <strong>0.5 saat</strong> Pro hüququn qaldı. Ultimate-ə keç — aylıq 50 saat + 24/7 giriş.</div>
-      <button class="upgrade-bar-btn">Yükselt ↗</button>
-    </div>
-
-    <div class="fd-section">
-    <div class="reminder-banner">
-      <i class="ti ti-clock" aria-hidden="true"></i>
-      <span>Sabah saat <strong>09:00</strong>-da Pod P-101 rezervasiyası başlayır. Unutma!</span>
-    </div>
-    </div>
-
-    <div class="header">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div class="fd-avatar">AQ</div>
-        <div>
-          <div class="user-name">Anar Quliyev</div>
-          <div><span class="badge-pro"><i class="ti ti-crown" aria-hidden="true" style="font-size:10px"></i> Pro Pass</span></div>
-        </div>
-      </div>
-      <div class="notif" onclick="fd_toggleNotif()" aria-label="Notifications" role="button">
-        <i class="ti ti-bell" aria-hidden="true" style="font-size:18px"></i>
-        <div class="notif-dot" id="notifDot"></div>
-      </div>
-    </div>
-
-    <div class="fd-section">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-lbl"><i class="ti ti-clock" aria-hidden="true" style="font-size:12px"></i> Bu ay</div>
-        <div class="stat-val">24.5 <span class="stat-unit">saat</span></div>
-        <div class="stat-sub up">↑ 6.5 keçən aydan</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-lbl"><i class="ti ti-calendar" aria-hidden="true" style="font-size:12px"></i> Qalan</div>
-        <div class="stat-val">0.5 <span class="stat-unit">saat</span></div>
-        <div class="stat-sub down">25-dən 24.5 istifadə</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-lbl"><i class="ti ti-bolt" aria-hidden="true" style="font-size:12px"></i> Bu həftə</div>
-        <div class="stat-val">10.2 <span class="stat-unit">saat</span></div>
-        <div class="stat-sub muted">5 gündə</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-lbl"><i class="ti ti-coin" aria-hidden="true" style="font-size:12px"></i> Ümumi xərc</div>
-        <div class="stat-val">₼60 <span class="stat-unit">/ay</span></div>
-        <div class="stat-sub muted">Pro Pass abunə</div>
-      </div>
-    </div>
-
-    <div class="sec-label">Həftəlik hədəf <button class="sec-link" onclick="fd_openGoalModal()">Dəyiş ↗</button></div>
-    <div class="goal-card">
-      <div class="ring-wrap">
-        <svg width="72" height="72" viewBox="0 0 72 72">
-          <circle cx="36" cy="36" r="30" fill="none" stroke="var(--card2)" stroke-width="5"/>
-          <circle id="goalArc" cx="36" cy="36" r="30" fill="none" stroke="#6366f1" stroke-width="5"
-            stroke-dasharray="188.5" stroke-dashoffset="47" stroke-linecap="round"/>
-        </svg>
-        <div class="ring-label">
-          <div class="ring-pct" id="goalPct">75%</div>
-          <div class="ring-sub">hədəf</div>
-        </div>
-      </div>
-      <div class="goal-info">
-        <div class="goal-title">Həftəlik <span id="goalHrs">20</span> saat hədəfi</div>
-        <div class="goal-bar-bg"><div class="goal-bar-fill" id="goalFill" style="width:51%"></div></div>
-        <div style="font-size:11px;color:var(--txt3)">10.2 / <span id="goalMax">20</span> saat · Bu həftə</div>
-        <div style="font-size:11px;color:var(--green);margin-top:3px">Aylıq 75% hədəfə çatılıb!</div>
-      </div>
-    </div>
-
-    <div class="sec-label">Streak</div>
-    <div class="streak-card">
-      <div>
-        <div style="font-size:11px;color:var(--txt3);margin-bottom:8px">Bu həftənin gəlişləri</div>
-        <div class="streak-days">
-          <div class="day-dot d-done">B</div>
-          <div class="day-dot d-done">Ç</div>
-          <div class="day-dot d-done">Ç</div>
-          <div class="day-dot d-done">C</div>
-          <div class="day-dot d-today">C</div>
-          <div class="day-dot d-miss">Ş</div>
-          <div class="day-dot d-miss">B</div>
-        </div>
-      </div>
-      <div class="streak-right">
-        <div style="font-size:20px">🔥</div>
-        <div class="streak-num">5</div>
-        <div class="streak-lbl">günlük streak</div>
-      </div>
-    </div>
-
-    <div class="sec-label">Fokus analitikası</div>
-    <div class="chart-card">
-      <div style="font-size:13px;font-weight:500">Həftəlik müqayisə</div>
-      <div class="chart-legend">
-        <span class="leg-item"><span class="leg-dot" style="background:#6366f1"></span>Bu həftə</span>
-        <span class="leg-item"><span class="leg-dot" style="background:#3a3a48"></span>Keçən həftə</span>
-      </div>
-      <div style="position:relative;width:100%;height:150px">
-        <canvas id="weekChart" role="img" aria-label="Weekly focus hours comparison. This week: Mon 2h, Tue 1.5h, Wed 3h, Thu 2.5h, Fri 1.2h. Last week: Mon 1.5h, Tue 2h, Wed 1h, Thu 2h, Fri 2.5h">Focus hours by day of week.</canvas>
-      </div>
-    </div>
-
-    <div class="sec-label">Pomodoro Taymer</div>
-    <div class="timer-card">
-      <div style="font-size:11px;color:var(--txt3);margin-bottom:10px">Aktiv pod: P-103 · Bugün 14:00–16:30</div>
-      <div class="mode-tabs">
-        <button class="mode-tab active" onclick="fd_setMode(25,'Fokus',this)">25 dəq fokus</button>
-        <button class="mode-tab" onclick="fd_setMode(5,'Qısa fasilə',this)">5 dəq fasilə</button>
-        <button class="mode-tab" onclick="fd_setMode(15,'Uzun fasilə',this)">15 dəq</button>
-      </div>
-      <div class="timer-ring-wrap">
-        <svg width="96" height="96" viewBox="0 0 96 96">
-          <circle cx="48" cy="48" r="40" fill="none" stroke="var(--card2)" stroke-width="5"/>
-          <circle id="timerArc" cx="48" cy="48" r="40" fill="none" stroke="#6366f1" stroke-width="5"
-            stroke-dasharray="251.3" stroke-dashoffset="63" stroke-linecap="round"/>
-        </svg>
-        <div class="timer-time" id="fd_timerDisplay">18:47</div>
-      </div>
-      <div style="font-size:11px;color:var(--txt3)" id="fd_timerLabel">Fokus sessiyası</div>
-      <div class="timer-controls">
-        <button class="timer-btn primary" id="fd_timerToggle" onclick="fd_toggleTimer()">Dayan</button>
-        <button class="timer-btn" onclick="fd_resetTimer()">Sıfırla</button>
-        <button class="timer-btn" onclick="fd_skipTimer()">Keç</button>
-      </div>
-      <div class="session-dots" id="sessionDots"></div>
-    </div>
-
-    <div class="sec-label">Rezervasiyalar <button class="sec-link" onclick="sendPrompt('Show all my Stupod booking history')">Hamısı ↗</button></div>
-    <div class="booking-list">
-      <div class="booking-item">
-        <div class="b-icon b-active"><i class="ti ti-door-enter" aria-hidden="true"></i></div>
-        <div>
-          <div class="b-name">Pod P-103</div>
-          <div class="b-meta">Bugün, 14:00 – 16:30</div>
-        </div>
-        <div class="b-right">
-          <div class="b-price">₼10.00</div>
-          <div class="b-status s-green">Aktiv</div>
-        </div>
-      </div>
-      <div class="booking-item">
-        <div class="b-icon b-upcoming"><i class="ti ti-calendar-event" aria-hidden="true"></i></div>
-        <div>
-          <div class="b-name">Pod P-101</div>
-          <div class="b-meta">Sabah, 09:00 – 11:00</div>
-        </div>
-        <div class="b-right">
-          <div class="b-price">₼8.00</div>
-          <div class="b-status s-indigo">Gözləyir</div>
-        </div>
-      </div>
-      <div class="booking-item">
-        <div class="b-icon b-done"><i class="ti ti-check" aria-hidden="true"></i></div>
-        <div>
-          <div class="b-name">Pod P-105 (Geniş)</div>
-          <div class="b-meta">19 May, 10:00 – 13:00</div>
-        </div>
-        <div class="b-right">
-          <div class="b-price">₼18.00</div>
-          <div class="b-status s-gray">Tamamlandı</div>
-        </div>
-      </div>
-      <div class="booking-item">
-        <div class="b-icon b-done"><i class="ti ti-check" aria-hidden="true"></i></div>
-        <div>
-          <div class="b-name">Pod P-102</div>
-          <div class="b-meta">17 May, 13:00 – 15:00</div>
-        </div>
-        <div class="b-right">
-          <div class="b-price">₼8.00</div>
-          <div class="b-status s-gray">Tamamlandı</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec-label">Sevimli Podlar <button class="sec-link" onclick="sendPrompt('Show live pod availability at Stupod')">Canlı status ↗</button></div>
-    <div class="fav-grid">
-      <div class="fav-pod" onclick="sendPrompt('Book Pod P-103 at Stupod for tomorrow')">
-        <span class="fav-star">★</span>
-        <div class="fav-pod-name">Pod P-103</div>
-        <div class="fav-pod-meta">Standard · 1 nəfər</div>
-        <div><span class="fav-pod-badge fav-avail">Boşdur</span></div>
-      </div>
-      <div class="fav-pod" onclick="sendPrompt('Book Pod P-105 at Stupod for tomorrow')">
-        <span class="fav-star">★</span>
-        <div class="fav-pod-name">Pod P-105</div>
-        <div class="fav-pod-meta">Geniş · 4 nəfər</div>
-        <div><span class="fav-pod-badge fav-busy">Məşğul</span></div>
-      </div>
-      <div class="fav-pod" onclick="sendPrompt('Book Pod P-101 at Stupod')">
-        <span class="fav-star">★</span>
-        <div class="fav-pod-name">Pod P-101</div>
-        <div class="fav-pod-meta">Standard · 1 nəfər</div>
-        <div><span class="fav-pod-badge fav-avail">Boşdur</span></div>
-      </div>
-      <div class="fav-pod" onclick="sendPrompt('Add a new favorite pod on Stupod')">
-        <div style="display:flex;align-items:center;justify-content:center;height:54px;color:var(--txt3)">
-          <i class="ti ti-plus" aria-hidden="true" style="font-size:20px"></i>
-        </div>
-        <div class="fav-pod-meta" style="text-align:center">Pod əlavə et</div>
-      </div>
-    </div>
-
-    <div class="sec-label">Healthy Cafe</div>
-    <div class="cafe-wallet">
-      <div class="cafe-ico"><i class="ti ti-coffee" aria-hidden="true"></i></div>
-      <div>
-        <div class="wallet-lbl">Cafe balansı</div>
-        <div class="wallet-bal">₼24.50</div>
-        <div class="perks-row">
-          <span class="perk-badge pb-amber">Pro: 20% endirim</span>
-          <span class="perk-badge pb-green">1 pulsuz qəhvə</span>
-          <span class="perk-badge pb-indigo">Bu ay ₼18.40 xərc</span>
-        </div>
-      </div>
-      <div class="topup-btn" onclick="sendPrompt('Top up my Stupod cafe wallet with ₼20')" aria-label="Top up wallet">
-        <i class="ti ti-plus" aria-hidden="true" style="font-size:16px"></i>
-      </div>
-    </div>
-
-    <div class="sec-label">Son sifarişlər <button class="sec-link" onclick="sendPrompt('Show my full Stupod cafe order history and spending')">Hamısı ↗</button></div>
-    <div class="cafe-history">
-      <div class="cafe-row">
-        <div class="cafe-emoji">☕</div>
-        <div>
-          <div class="cafe-item">Filter Qəhvə</div>
-          <div class="cafe-date">Bugün, 13:45</div>
-        </div>
-        <div style="text-align:right;margin-left:auto">
-          <div class="cafe-amt">₼2.00</div>
-          <div class="cafe-disc">20% endirim tətbiq edildi</div>
-        </div>
-      </div>
-      <div class="cafe-row">
-        <div class="cafe-emoji">🥗</div>
-        <div>
-          <div class="cafe-item">Fit Tələbə Salatı</div>
-          <div class="cafe-date">Dünən, 12:20</div>
-        </div>
-        <div style="text-align:right;margin-left:auto">
-          <div class="cafe-amt">₼3.60</div>
-          <div class="cafe-disc">20% endirim tətbiq edildi</div>
-        </div>
-      </div>
-      <div class="cafe-row">
-        <div class="cafe-emoji">🍵</div>
-        <div>
-          <div class="cafe-item">Kəklikotu Çayı</div>
-          <div class="cafe-date">19 May, 15:10</div>
-        </div>
-        <div style="text-align:right;margin-left:auto">
-          <div class="cafe-amt">₼1.60</div>
-          <div class="cafe-disc">20% endirim tətbiq edildi</div>
-        </div>
-      </div>
-      <div class="cafe-row">
-        <div class="cafe-emoji">🥑</div>
-        <div>
-          <div class="cafe-item">Avokado Tost</div>
-          <div class="cafe-date">19 May, 09:30</div>
-        </div>
-        <div style="text-align:right;margin-left:auto">
-          <div class="cafe-amt">₼3.36</div>
-          <div class="cafe-disc">20% endirim tətbiq edildi</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec-label">Secondbook İstək Siyahısı <button class="sec-link" onclick="sendPrompt('Show all books in Stupod Secondbook marketplace')">Baza ↗</button></div>
-    <div class="wish-list">
-      <div class="wish-item">
-        <div class="wish-cover" style="background:#1e1b4b">📘</div>
-        <div>
-          <div class="wish-title">Intro to Algorithms</div>
-          <div class="wish-meta">CS301 · BDU</div>
-        </div>
-        <div class="wish-right">
-          <div class="wish-price">₼14</div>
-          <div class="wish-orig">₼75</div>
-          <button class="wish-buy" onclick="sendPrompt('I want to buy Introduction to Algorithms from Stupod Secondbook marketplace')">Al →</button>
-        </div>
-      </div>
-      <div class="wish-item">
-        <div class="wish-cover" style="background:#064e3b">📗</div>
-        <div>
-          <div class="wish-title">Data Structures & C++</div>
-          <div class="wish-meta">CS204 · Proqramlaşdırma</div>
-        </div>
-        <div class="wish-right">
-          <div class="wish-price">₼18</div>
-          <div class="wish-orig">₼80</div>
-          <button class="wish-buy" onclick="sendPrompt('Buy Data Structures C++ book from Stupod Secondbook')">Al →</button>
-        </div>
-      </div>
-      <div class="wish-item">
-        <div class="wish-cover" style="background:#78350f">📙</div>
-        <div>
-          <div class="wish-title">Microeconomics (Mankiw)</div>
-          <div class="wish-meta">ECON101 · İqtisadiyyat</div>
-        </div>
-        <div class="wish-right">
-          <div class="wish-price">₼12</div>
-          <div class="wish-orig">₼50</div>
-          <button class="wish-buy" onclick="sendPrompt('Buy Mankiw Microeconomics from Stupod Secondbook')">Al →</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec-label">StudyBuddy <button class="sec-link" onclick="sendPrompt('Find me more study buddies on Stupod that match Computer Science')">Daha çox ↗</button></div>
-    <div class="buddy-widget">
-      <div class="buddy-row">
-        <div class="buddy-av" style="background:rgba(139,92,246,.15);color:#a78bfa">SA</div>
-        <div>
-          <div class="buddy-name">Sabrina A.</div>
-          <div class="buddy-field">Computer Science · 3-cü kurs</div>
-        </div>
-        <span class="buddy-chip chip-match">Uyğun</span>
-      </div>
-      <div class="buddy-row">
-        <div class="buddy-av" style="background:rgba(20,184,166,.15);color:#2dd4bf">ER</div>
-        <div>
-          <div class="buddy-name">Elvin R.</div>
-          <div class="buddy-field">Hüquq · 4-cü kurs</div>
-        </div>
-        <span class="buddy-chip chip-req">İstək var</span>
-      </div>
-      <div class="buddy-row">
-        <div class="buddy-av" style="background:rgba(251,146,60,.15);color:#fb923c">NG</div>
-        <div>
-          <div class="buddy-name">Nigar G.</div>
-          <div class="buddy-field">İqtisadiyyat · 2-ci kurs</div>
-        </div>
-        <span class="buddy-chip chip-match">Uyğun</span>
-      </div>
-      <div class="buddy-row">
-        <div class="buddy-av" style="background:rgba(34,197,94,.15);color:#4ade80">TH</div>
-        <div>
-          <div class="buddy-name">Turan H.</div>
-          <div class="buddy-field">Computer Science · 2-ci kurs</div>
-        </div>
-        <span class="buddy-chip chip-pend">Gözləyir</span>
-      </div>
-    </div>
-
-    <div class="sec-label">Tez Keçid</div>
-    <div class="quick-actions">
-      <div class="qa-btn" onclick="sendPrompt('Book a pod at Stupod right now')">
-        <i class="ti ti-door-enter" aria-hidden="true" style="font-size:20px;color:var(--txt2)"></i>
-        <span class="qa-lbl">Pod Bron et</span>
-      </div>
-      <div class="qa-btn" onclick="sendPrompt('Find me a study buddy on Stupod')">
-        <i class="ti ti-users" aria-hidden="true" style="font-size:20px;color:var(--txt2)"></i>
-        <span class="qa-lbl">Buddy Tap</span>
-      </div>
-      <div class="qa-btn" onclick="sendPrompt('Browse Secondbook marketplace on Stupod')">
-        <i class="ti ti-book" aria-hidden="true" style="font-size:20px;color:var(--txt2)"></i>
-        <span class="qa-lbl">Secondbook</span>
-      </div>
-      <div class="qa-btn" onclick="sendPrompt('Show the Stupod cafe menu')">
-        <i class="ti ti-coffee" aria-hidden="true" style="font-size:20px;color:var(--txt2)"></i>
-        <span class="qa-lbl">Cafe Menyu</span>
-      </div>
-      <div class="qa-btn" onclick="sendPrompt('What are my Stupod plan options and pricing?')">
-        <i class="ti ti-crown" aria-hidden="true" style="font-size:20px;color:var(--txt2)"></i>
-        <span class="qa-lbl">Planlar</span>
-      </div>
-      <div class="qa-btn" onclick="sendPrompt('Show my Stupod account settings and profile')">
-        <i class="ti ti-settings" aria-hidden="true" style="font-size:20px;color:var(--txt2)"></i>
-        <span class="qa-lbl">Parametrlər</span>
-      </div>
-    </div>
-    </div>
-
-    <div class="modal-overlay" id="goalModal">
-      <div class="modal">
-        <div class="modal-title">Həftəlik hədəfi dəyiş</div>
-        <input class="modal-input" type="number" id="goalInput" value="20" min="1" max="60" placeholder="Saat daxil et...">
-        <div style="font-size:11px;color:var(--txt3);margin-top:6px">Tövsiyə: 15–30 saat/həftə optimal nəticə verir.</div>
-        <div class="modal-actions">
-          <button class="modal-cancel" onclick="fd_closeGoalModal()">Ləğv et</button>
-          <button class="modal-save" onclick="fd_saveGoal()">Saxla</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="notif-panel" id="notifPanel">
-      <div class="notif-panel-title">
-        Bildirişlər
-        <button class="notif-close" onclick="fd_toggleNotif()"><i class="ti ti-x" aria-hidden="true"></i></button>
-      </div>
-      <div class="notif-item">
-        <div>🔔 <strong>Pod P-101</strong> rezervasiyanız sabah 09:00-da başlayır.</div>
-        <div class="notif-time">30 dəqiqə əvvəl</div>
-      </div>
-      <div class="notif-item">
-        <div>🎉 Elvin R. sənə buddy istəyi göndərdi. Qəbul et?</div>
-        <div class="notif-time">2 saat əvvəl</div>
-      </div>
-      <div class="notif-item">
-        <div>📦 "Intro to Algorithms" kitabı hələ mövcuddur. Tez ol!</div>
-        <div class="notif-time">5 saat əvvəl</div>
-      </div>
-      <div class="notif-item">
-        <div>☕ Pro endiriminlə bu ay ₼4.60 qənaət etdin.</div>
-        <div class="notif-time">Dünən</div>
-      </div>
-      <div class="notif-item">
-        <div>🔥 5 günlük streak! Bu həftəni tamamla!</div>
-        <div class="notif-time">Dünən</div>
-      </div>
-    </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// Dummy function to catch prompts from the Full Dashboard UI
-function sendPrompt(msg) { console.log('Mock Prompt Sent:', msg); }
-
 // =========== NAVIGATION ===========
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1441,6 +934,12 @@ function showPage(id) {
 function setActive(el) {
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   el.classList.add('active');
+}
+function showDashPage(id, el) {
+  document.querySelectorAll('.dash-page').forEach(p => p.style.display = 'none');
+  document.getElementById('dash-' + id).style.display = 'block';
+  document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+  if(el) el.classList.add('active');
 }
 
 // =========== HERO POD GRID ===========
@@ -1598,27 +1097,62 @@ function buildBooksGrid() {
     </div>`).join('');
 }
 
-// =========== FOCUS TIMER (Startup Dashboard) ===========
+// =========== FOCUS TIMER ===========
 let timerInterval = null, timerSecs = 25*60, timerRunning = false, timerTotal = 25*60;
 function toggleTimer() {
   timerRunning = !timerRunning;
-  document.getElementById('timer-btn').textContent = timerRunning ? '⏸ Pause' : '▶ Start';
+  const txt = timerRunning ? '⏸ Pause' : '▶ Start';
+  
+  if (document.getElementById('timer-btn')) document.getElementById('timer-btn').textContent = txt;
+  if (document.getElementById('timer-btn-lg')) document.getElementById('timer-btn-lg').textContent = txt;
+
   if (timerRunning) {
     timerInterval = setInterval(() => {
-      if (timerSecs <= 0) { clearInterval(timerInterval); timerRunning = false; document.getElementById('timer-btn').textContent='▶ Start'; return; }
+      if (timerSecs <= 0) { 
+        clearInterval(timerInterval); 
+        timerRunning = false; 
+        if (document.getElementById('timer-btn')) document.getElementById('timer-btn').textContent='▶ Start'; 
+        if (document.getElementById('timer-btn-lg')) document.getElementById('timer-btn-lg').textContent='▶ Start'; 
+        return; 
+      }
       timerSecs--;
       updateTimerDisplay();
     }, 1000);
   } else clearInterval(timerInterval);
 }
-function resetTimer() { clearInterval(timerInterval); timerRunning = false; timerSecs = timerTotal; document.getElementById('timer-btn').textContent='▶ Start'; updateTimerDisplay(); }
-function setTimerMode(m, label) { clearInterval(timerInterval); timerRunning = false; timerSecs = m*60; timerTotal = m*60; document.getElementById('timer-btn').textContent='▶ Start'; updateTimerDisplay(); }
+function resetTimer() { 
+  clearInterval(timerInterval); 
+  timerRunning = false; 
+  timerSecs = timerTotal; 
+  if (document.getElementById('timer-btn')) document.getElementById('timer-btn').textContent='▶ Start'; 
+  if (document.getElementById('timer-btn-lg')) document.getElementById('timer-btn-lg').textContent='▶ Start'; 
+  updateTimerDisplay(); 
+}
+function setTimerMode(m, label, el) { 
+  clearInterval(timerInterval); 
+  timerRunning = false; 
+  timerSecs = m*60; 
+  timerTotal = m*60; 
+  
+  if (document.getElementById('timer-btn')) document.getElementById('timer-btn').textContent='▶ Start'; 
+  if (document.getElementById('timer-btn-lg')) document.getElementById('timer-btn-lg').textContent='▶ Start'; 
+  
+  if (el) {
+    el.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+  
+  updateTimerDisplay(); 
+}
 function updateTimerDisplay() {
   const m = Math.floor(timerSecs/60), s = timerSecs%60;
-  document.getElementById('timer-display').textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  const timeStr = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
   const pct = Math.round((timerSecs/timerTotal)*100);
-  const circle = document.querySelector('.timer-circle');
-  if (circle) circle.style.setProperty('--prog', pct+'%');
+  
+  if (document.getElementById('timer-display')) document.getElementById('timer-display').textContent = timeStr;
+  if (document.getElementById('timer-display-lg')) document.getElementById('timer-display-lg').textContent = timeStr;
+  
+  document.querySelectorAll('.timer-circle').forEach(c => c.style.setProperty('--prog', pct+'%'));
 }
 
 // =========== FILTER BUTTONS (buddy page) ===========
@@ -1629,149 +1163,13 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// =========== FULL DASHBOARD INTEGRATED LOGIC (fd_ prefix to avoid collision) ===========
-
-// --- CHART ---
-function initFullDashChart() {
-  const chartEl = document.getElementById('weekChart');
-  if(!chartEl) return;
-  new Chart(chartEl, {
-    type: 'bar',
-    data: {
-      labels: ['B.e','Ç.a','Çər','C.a','Cüm','Şən','Baz'],
-      datasets: [
-        { label: 'Bu həftə', data: [2,1.5,3,2.5,1.2,0,0], backgroundColor: '#6366f1', borderRadius: 4, barPercentage: 0.55 },
-        { label: 'Keçən həftə', data: [1.5,2,1,2,2.5,1,0.5], backgroundColor: '#3a3a48', borderRadius: 4, barPercentage: 0.55 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { size: 10 }, color: '#71717a' } },
-        y: { grid: { color: 'rgba(128,128,128,.1)' }, ticks: { font: { size: 10 }, color: '#71717a', stepSize: 1 }, beginAtZero: true, max: 4 }
-      }
-    }
-  });
-}
-
-// --- TIMER (Full Dashboard Version) ---
-const fd_CIRC = 251.3;
-let fd_totalSecs = 25 * 60;
-let fd_remaining = 25 * 60 - (6 * 60 + 13);
-let fd_running = true;
-let fd_timerInterval;
-let fd_sessionsCompleted = 2;
-
-function fd_renderSessionDots() {
-  const c = document.getElementById('sessionDots');
-  if(!c) return;
-  c.innerHTML = '';
-  for(let i = 0; i < 4; i++) {
-    const d = document.createElement('div');
-    d.className = 'sess-dot ' + (i < fd_sessionsCompleted ? 'sess-done-dot' : 'sess-empty-dot');
-    c.appendChild(d);
-  }
-}
-
-function fd_updateTimerArc() {
-  const arc = document.getElementById('timerArc');
-  if(!arc) return;
-  const pct = fd_remaining / fd_totalSecs;
-  arc.style.strokeDashoffset = fd_CIRC * (1 - pct);
-}
-
-function fd_updateDisplay() {
-  const display = document.getElementById('fd_timerDisplay');
-  if(!display) return;
-  const m = Math.floor(fd_remaining / 60);
-  const s = fd_remaining % 60;
-  display.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-  fd_updateTimerArc();
-}
-
-function fd_tick() {
-  if(fd_remaining > 0) { fd_remaining--; fd_updateDisplay(); }
-  else {
-    clearInterval(fd_timerInterval);
-    fd_running = false;
-    document.getElementById('fd_timerToggle').textContent = 'Başla';
-    fd_sessionsCompleted = Math.min(4, fd_sessionsCompleted + 1);
-    fd_renderSessionDots();
-  }
-}
-
-function fd_toggleTimer() {
-  const btn = document.getElementById('fd_timerToggle');
-  if(fd_running) { clearInterval(fd_timerInterval); fd_running = false; btn.textContent = 'Davam et'; }
-  else { fd_timerInterval = setInterval(fd_tick, 1000); fd_running = true; btn.textContent = 'Dayan'; }
-}
-
-function fd_resetTimer() {
-  clearInterval(fd_timerInterval); fd_running = false;
-  fd_remaining = fd_totalSecs; fd_updateDisplay(); document.getElementById('fd_timerToggle').textContent = 'Başla';
-}
-
-function fd_skipTimer() {
-  clearInterval(fd_timerInterval); fd_running = false;
-  fd_remaining = 0; fd_updateDisplay(); document.getElementById('fd_timerToggle').textContent = 'Başla';
-  fd_sessionsCompleted = Math.min(4, fd_sessionsCompleted + 1);
-  fd_renderSessionDots();
-}
-
-function fd_setMode(mins, label, el) {
-  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  clearInterval(fd_timerInterval); fd_running = false;
-  fd_totalSecs = mins * 60; fd_remaining = fd_totalSecs;
-  document.getElementById('fd_timerLabel').textContent = label + ' sessiyası';
-  fd_updateDisplay(); document.getElementById('fd_timerToggle').textContent = 'Başla';
-  const arc = document.getElementById('timerArc');
-  if(arc) arc.style.stroke = mins === 5 ? '#22c55e' : mins === 15 ? '#f59e0b' : '#6366f1';
-}
-
-// --- GOAL MODAL (Full Dashboard Version) ---
-function fd_openGoalModal() { document.getElementById('goalModal').classList.add('show'); }
-function fd_closeGoalModal() { document.getElementById('goalModal').classList.remove('show'); }
-function fd_saveGoal() {
-  const v = Math.max(1, Math.min(60, parseInt(document.getElementById('goalInput').value) || 20));
-  document.getElementById('goalHrs').textContent = v;
-  document.getElementById('goalMax').textContent = v;
-  const current = 10.2;
-  const pct = Math.round((current / v) * 100);
-  document.getElementById('goalPct').textContent = pct + '%';
-  document.getElementById('goalFill').style.width = Math.min(100, pct) + '%';
-  const c = 188.5;
-  document.getElementById('goalArc').style.strokeDashoffset = c * (1 - Math.min(1, current / v));
-  fd_closeGoalModal();
-}
-
-// --- NOTIF PANEL (Full Dashboard Version) ---
-function fd_toggleNotif() {
-  const p = document.getElementById('notifPanel');
-  p.classList.toggle('show');
-  document.getElementById('notifDot').style.display = p.classList.contains('show') ? 'none' : '';
-}
-
-// =========== INIT ALL ===========
+// =========== INIT ===========
 window.addEventListener('load', () => {
-  // Startup Page Inits
   buildHeroPods();
   buildFAQ();
   buildBuddyList();
   buildBooksGrid();
   goBookingStep(1);
-
-  // Full Dashboard Inits
-  initFullDashChart();
-  fd_renderSessionDots();
-  fd_timerInterval = setInterval(fd_tick, 1000);
-  fd_updateDisplay();
-  
-  // Close full dash modal on overlay click
-  document.getElementById('goalModal').addEventListener('click', function(e) {
-    if(e.target === this) fd_closeGoalModal();
-  });
 });
 </script>
 </body>

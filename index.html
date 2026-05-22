@@ -3,888 +3,1950 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UniHub - All-in-One Student SaaS Platform</title>
+  <title>StuPod — Infrastructure for Deep Work</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+ 
   <style>
-    /* =========== CSS VARIABLES & THEME =========== */
     :root {
-      --bg: #09090b;
-      --surface: #18181b;
-      --surface-card: #27272a;
-      --text: #f4f4f5;
-      --text2: #a1a1aa;
-      --text3: #71717a;
-      --accent: #6366f1;
-      --accent-rgb: 99, 102, 241;
-      --accent2: #ec4899;
-      --accent3: #8b5cf6;
-      --border: #27272a;
-      --green: #10b981;
-      --red: #ef4444;
-      --font-head: 'Plus Jakarta Sans', sans-serif;
-      --font-body: 'Inter', sans-serif;
-      --radius: 12px;
-      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --bg: #F7F5F0;
+      --bg2: #EFEDE7;
+      --bg3: #E8E5DC;
+      --surface: #FFFFFF;
+      --text: #1A1916;
+      --text2: #6B6860;
+      --text3: #9B9890;
+      --gold: #B8952A;
+      --gold-light: #F0E8CC;
+      --gold-mid: #D4A93C;
+      --border: rgba(26,25,22,0.1);
+      --border2: rgba(26,25,22,0.06);
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'Geist', -apple-system, sans-serif;
+      --font-mono: 'Geist Mono', monospace;
+      --r: 16px;
+      --r-sm: 10px;
+      --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
     }
-
-    /* =========== GLOBAL RESET & BASE =========== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    html { scroll-behavior: smooth; }
+ 
     body {
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
-      font-family: var(--font-body);
-      line-height: 1.5;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; color: var(--text); }
-
-    /* =========== UTILITIES & COMPONENTS =========== */
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-    .badge {
-      padding: 4px 8px;
-      border-radius: 20px;
+ 
+    /* ─── UTILITIES ─── */
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 100px 0; }
+ 
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       font-size: 11px;
       font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: var(--font-mono);
     }
-    .badge-green { background: rgba(16,185,129,0.15); color: var(--green); }
-    
-    /* =========== NAVIGATION BAR (RESPONSIVE) =========== */
-    .navbar {
-      background: rgba(24, 24, 27, 0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    .label::before { content: ''; width: 16px; height: 1px; background: var(--gold); display: inline-block; }
+ 
+    h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.1; color: var(--text); }
+ 
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.2s var(--ease);
+      white-space: nowrap;
     }
-    .nav-container {
+    .btn-dark {
+      background: var(--text);
+      color: #fff;
+    }
+    .btn-dark:hover { background: #2d2c28; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--bg2); }
+ 
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(247,245,240,0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border2);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo em { color: var(--gold); font-style: normal; }
+    .nav-links {
+      display: flex; gap: 2px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text2);
+      text-decoration: none;
+      padding: 7px 14px;
+      border-radius: 100px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--bg2); }
+    .nav-links a.active { color: var(--text); }
+    .nav-cta { display: flex; align-items: center; gap: 10px; }
+ 
+    .ham { display: none; cursor: pointer; padding: 8px; background: none; border: none; }
+    .ham span { display: block; width: 20px; height: 1.5px; background: var(--text); margin: 5px 0; transition: 0.3s; }
+ 
+    /* ─── PAGES ─── */
+    .page { display: none; }
+    .page.active { display: block; }
+ 
+    /* ─── HERO ─── */
+    .hero-wrap { padding-top: 140px; padding-bottom: 80px; }
+ 
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold-light);
+      border: 1px solid rgba(184,149,42,0.25);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px 6px 10px;
+      border-radius: 100px;
+      margin-bottom: 36px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+    .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+ 
+    .hero-headline {
+      font-size: clamp(52px, 7vw, 96px);
+      letter-spacing: -0.03em;
+      max-width: 800px;
+      margin-bottom: 24px;
+      line-height: 1.0;
+    }
+    .hero-headline em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text2);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+      font-weight: 300;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+ 
+    /* POD VISUAL */
+    .hero-pod-section {
+      margin-top: 80px;
+      position: relative;
+    }
+    .pod-stage {
+      background: var(--bg2);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      padding: 60px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pod-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(184,149,42,0.08) 0%, transparent 65%);
+    }
+    .pod-visual {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .pod-3d {
+      width: 360px;
+      max-width: 100%;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    /* SVG Pod illustration */
+    .pod-svg-wrap svg { width: 100%; height: auto; }
+ 
+    .pod-badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .pod-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pod-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+ 
+    /* floating stat chips */
+    .float-chip {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      font-size: 13px;
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-chip .val { font-family: var(--font-serif); font-size: 24px; color: var(--text); display: block; }
+    .float-chip .lbl { color: var(--text3); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; }
+    .chip-1 { left: -20px; top: 80px; animation-delay: 0s; }
+    .chip-2 { right: -10px; top: 60px; animation-delay: 2s; }
+    .chip-3 { right: 30px; bottom: 50px; animation-delay: 4s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+ 
+    /* ─── PROBLEMS ─── */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .problem-cell {
+      background: var(--surface);
+      padding: 32px 28px;
+      transition: background 0.2s;
+    }
+    .problem-cell:hover { background: var(--bg2); }
+    .problem-num {
+      font-family: var(--font-serif);
+      font-size: 48px;
+      color: var(--text3);
+      opacity: 0.4;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .problem-title { font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+    .problem-desc { font-size: 13px; color: var(--text3); line-height: 1.6; }
+ 
+    /* ─── SOLUTION ─── */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .solution-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+    .solution-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.07); }
+    .sol-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 24px;
+    }
+    .sol-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .sol-title { font-family: var(--font-serif); font-size: 26px; margin-bottom: 14px; }
+    .sol-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+    .sol-items { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .sol-items li { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 10px; }
+    .sol-items li::before { content: '—'; color: var(--gold); font-weight: 300; }
+ 
+    /* ─── AVAILABILITY ─── */
+    .avail-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .avail-header {
+      padding: 28px 36px;
+      border-bottom: 1px solid var(--border2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .avail-title { font-size: 15px; font-weight: 500; }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #EDFAF3;
+      color: #1A7A4A;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-family: var(--font-mono);
+    }
+    .live-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: pulse 2s infinite; }
+    .avail-grid {
+      padding: 28px 36px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 10px;
+    }
+    .avail-pod {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      border: 1.5px solid transparent;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .avail-pod.free {
+      background: #EDFAF3;
+      color: #1A7A4A;
+      border-color: rgba(34,197,94,0.2);
+    }
+    .avail-pod.free:hover {
+      background: #D4F5E4;
+      transform: scale(1.05);
+    }
+    .avail-pod.free.selected {
+      border-color: #22C55E;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+    }
+    .avail-pod.busy {
+      background: var(--bg2);
+      color: var(--text3);
+      cursor: not-allowed;
+    }
+    .avail-pod-name { font-family: var(--font-mono); font-size: 11px; font-weight: 500; }
+    .avail-pod-status { font-size: 10px; opacity: 0.7; }
+    .avail-footer {
+      padding: 20px 36px;
+      border-top: 1px solid var(--border2);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 70px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .logo { font-family: var(--font-head); font-size: 22px; font-weight: 800; color: #fff; }
-    .logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 8px; list-style: none; }
-    .nav-link {
-      color: var(--text2);
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: var(--radius);
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: var(--transition);
+    .avail-legend { display: flex; gap: 20px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+ 
+    /* ─── BUDDY ─── */
+    .buddy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
     }
-    .nav-link:hover, .nav-link.active { color: #fff; background: var(--surface); }
-    
-    /* CSS Menu Toggle (Hamburger) */
-    #menu-toggle { display: none; }
-    .menu-icon { display: none; cursor: pointer; padding: 10px; }
-    .menu-icon div { width: 22px; height: 2px; background: var(--text); margin: 4px 0; transition: 0.3s; }
-
-    /* =========== MULTI-PAGE SYSTEM =========== */
-    .page { display: none; animation: fadeIn 0.4s ease forwards; }
-    .page.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* =========== HOME / LANDING PAGE =========== */
-    .hero { text-align: center; padding: 80px 0 40px; }
-    .hero h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1.15; margin-bottom: 16px; }
-    .hero p { color: var(--text2); font-size: clamp(16px, 2vw, 18px); max-width: 600px; margin: 0 auto 30px; }
-    
-    .live-status-bar {
+    .buddy-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 20px;
       padding: 24px;
-      margin-bottom: 60px;
+      display: flex;
+      gap: 18px;
+      transition: all 0.2s var(--ease);
     }
-    .pods-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 12px;
-      margin-top: 20px;
+    .buddy-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .buddy-av {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 18px;
+      flex-shrink: 0;
     }
-    .pod-slot {
-      background: var(--bg);
+    .buddy-body { flex: 1; min-width: 0; }
+    .buddy-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+    .buddy-name { font-size: 15px; font-weight: 500; }
+    .online-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; }
+    .buddy-course { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
+    .buddy-tags-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .buddy-tag {
+      font-size: 11px;
+      color: var(--text2);
+      background: var(--bg2);
+      padding: 3px 10px;
+      border-radius: 100px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 8px;
+    }
+    .buddy-score-col { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
+    .match-pct { font-family: var(--font-serif); font-size: 26px; color: var(--gold); }
+    .match-lbl { font-size: 10px; color: var(--text3); font-family: var(--font-mono); letter-spacing: 0.06em; }
+ 
+    /* ─── SECONDBOOK ─── */
+    .books-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .book-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.25s var(--ease);
+    }
+    .book-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.07); }
+    .book-cover {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px;
+    }
+    .book-info { padding: 16px; }
+    .book-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 42px; }
+    .book-course { font-size: 11px; color: var(--text3); font-family: var(--font-mono); margin-bottom: 12px; }
+    .book-prices { display: flex; align-items: baseline; gap: 8px; }
+    .book-price { font-size: 16px; font-weight: 600; color: #1A7A4A; }
+    .book-orig { font-size: 12px; color: var(--text3); text-decoration: line-through; }
+ 
+    /* ─── STATS ─── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle at 100% 100%, rgba(184,149,42,0.07), transparent 70%);
+    }
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 56px;
+      line-height: 1;
+      color: var(--text);
+      margin: 12px 0 8px;
+    }
+    .stat-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
+ 
+    /* ─── FINAL CTA ─── */
+    .final-cta {
+      background: var(--text);
+      border-radius: 28px;
+      padding: 100px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 80px;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(184,149,42,0.15) 0%, transparent 60%);
+    }
+    .final-cta h2 {
+      color: #fff;
+      font-size: clamp(36px, 5vw, 64px);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .final-cta h2 em { font-style: italic; color: var(--gold-mid); }
+    .final-cta p { color: rgba(255,255,255,0.5); font-size: 16px; margin-bottom: 40px; position: relative; z-index: 1; }
+    .final-cta .btn-dark { background: #fff; color: var(--text); position: relative; z-index: 1; }
+    .final-cta .btn-dark:hover { background: var(--gold-light); }
+ 
+    /* ─── BOOKING WIZARD ─── */
+    .wizard-page { padding-top: 110px; padding-bottom: 80px; }
+    .wizard-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+    }
+    .wiz-steps {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .wiz-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text3);
+      background: var(--bg);
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+    .wiz-dot.active { border-color: var(--text); color: var(--text); background: var(--surface); }
+    .wiz-dot.done { background: var(--text); border-color: var(--text); color: #fff; }
+    .wiz-line { flex: 1; height: 1px; background: var(--border); margin: 0 10px; transition: background 0.25s; }
+    .wiz-line.done { background: var(--text); }
+ 
+    .wiz-section { display: none; }
+    .wiz-section.visible { display: block; }
+    .wiz-step-title { font-family: var(--font-serif); font-size: 28px; margin-bottom: 6px; }
+    .wiz-step-sub { font-size: 14px; color: var(--text3); margin-bottom: 28px; }
+ 
+    .loc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 0;
+    }
+    .wiz-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wiz-card:hover { border-color: rgba(26,25,22,0.3); }
+    .wiz-card.sel { border-color: var(--text); background: rgba(26,25,22,0.04); }
+    .wiz-card h4 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .wiz-card p { font-size: 12px; color: var(--text3); }
+    .wiz-card .avail-count { font-size: 12px; color: #1A7A4A; font-weight: 500; margin-top: 10px; display: block; }
+ 
+    .pod-pick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .pod-pick {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 10px;
       text-align: center;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.2s;
     }
-    .pod-slot:hover { border-color: var(--accent); }
-    .pod-slot.selected { border-color: var(--accent); background: rgba(99,102,241,0.1); }
-    .pod-num { font-weight: 700; font-size: 16px; }
-    .pod-status { font-size: 12px; margin-top: 4px; }
-
-    .features-grid {
+    .pod-pick:not(.occupied):hover { border-color: rgba(26,25,22,0.3); }
+    .pod-pick.sel { border-color: var(--text); }
+    .pod-pick.occupied { opacity: 0.35; cursor: not-allowed; }
+    .pod-pick-name { font-family: var(--font-mono); font-size: 13px; font-weight: 500; display: block; margin-top: 6px; }
+    .pod-pick-st { font-size: 10px; color: var(--text3); margin-top: 2px; display: block; }
+ 
+    .dur-row { display: flex; gap: 8px; margin-bottom: 20px; }
+    .dur-btn {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-sans);
+      color: var(--text2);
+    }
+    .dur-btn:hover, .dur-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+ 
+    .time-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 8px;
     }
-    .feat-card {
+    .time-slot {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      padding: 11px 6px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font-mono);
+      color: var(--text2);
+    }
+    .time-slot:not(.unavail):hover { border-color: rgba(26,25,22,0.4); color: var(--text); }
+    .time-slot.sel { background: var(--text); color: #fff; border-color: var(--text); }
+    .time-slot.unavail { opacity: 0.25; cursor: not-allowed; }
+ 
+    .confirm-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .confirm-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .confirm-row:last-child { margin-bottom: 0; }
+    .confirm-label { font-size: 11px; color: var(--text3); font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+    .confirm-val { font-size: 15px; font-weight: 500; }
+ 
+    /* ─── DASHBOARD ─── */
+    .dash-page-wrap { padding-top: 110px; padding-bottom: 80px; }
+    .dash-layout { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: start; }
+    .dash-nav {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 30px;
-      border-radius: var(--radius);
+      border-radius: 20px;
+      padding: 12px;
+      position: sticky;
+      top: 88px;
     }
-    .feat-icon { font-size: 32px; margin-bottom: 16px; }
-    .feat-card h3 { margin-bottom: 10px; }
-    .feat-card p { color: var(--text2); font-size: 14px; }
-
-    /* =========== BOOKING PAGE WIZARD =========== */
-    .wizard-container { max-width: 700px; margin: 40px auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; }
-    .step-indicator { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
-    .step-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; transition: var(--transition); }
-    .step-dot.active { border-color: var(--accent); color: var(--accent); }
-    .step-dot.done { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .step-line { flex: 1; height: 2px; background: var(--border); margin: 0 10px; transition: var(--transition); }
-    .step-line.done { background: var(--accent); }
-    
-    .location-grid, .pod-select-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
-    .wizard-card { background: var(--bg); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); cursor: pointer; transition: var(--transition); }
-    .wizard-card:hover, .wizard-card.selected { border-color: var(--accent); background: rgba(99,102,241,0.04); }
-    
-    .time-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; margin-top: 20px; }
-    .time-slot { background: var(--bg); border: 1px solid var(--border); padding: 12px 5px; text-align: center; border-radius: 8px; cursor: pointer; font-size: 14px; transition: var(--transition); }
-    .time-slot:hover:not(.unavailable), .time-slot.selected { border-color: var(--accent); color: var(--accent); }
-    .time-slot.unavailable { opacity: 0.3; cursor: not-allowed; background: rgba(255,255,255,0.02); }
-
-    /* =========== STUDYBUDDY MATCHING =========== */
-    .page-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin: 40px 0 20px; }
-    .match-filter { display: flex; flex-wrap: wrap; gap: 8px; }
-    .filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text2); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 500; transition: var(--transition); }
-    .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-    
-    .buddy-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 20px; margin-bottom: 40px; }
-    .buddy-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); display: flex; align-items: center; gap: 16px; }
-    .buddy-avatar { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
-    .buddy-info { flex: 1; min-width: 0; }
-    .buddy-name { font-weight: 600; font-size: 16px; }
-    .buddy-meta { color: var(--text3); font-size: 13px; margin: 2px 0 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .buddy-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .buddy-tag { background: var(--bg); border: 1px solid var(--border); color: var(--text2); padding: 3px 8px; border-radius: 4px; font-size: 11px; }
-    .match-score { font-family: var(--font-head); font-weight: 800; color: var(--accent2); font-size: 18px; }
-
-    /* =========== SECONDBOOK MARKETPLACE =========== */
-    .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
-    .book-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); }
-    .book-card:hover { transform: translateY(-4px); }
-    .book-cover { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
-    .book-info { padding: 16px; }
-    .book-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 44px; }
-    .book-course { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
-    .book-price-row { display: flex; align-items: baseline; gap: 8px; }
-    .book-price { font-weight: 700; color: var(--green); font-size: 16px; }
-    .book-orig { font-size: 12px; color: var(--text3); text-decoration: line-line-through; text-decoration: line-through; }
-
-    /* =========== PRICING SECTION =========== */
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 20px 0 40px; }
-    .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; position: relative; transition: var(--transition); }
-    .price-card.popular { border-color: var(--accent); }
-    .price-card.popular::after { content: 'POPULAR'; position: absolute; top: 16px; right: 16px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 20px; }
-    .price-name { font-size: 14px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
-    .price-amount { font-size: 36px; font-weight: 800; font-family: var(--font-head); margin: 12px 0 6px; }
-    .price-amount span { font-size: 14px; color: var(--text3); font-weight: 400; }
-    .price-desc { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
-    .price-features { list-style: none; margin-bottom: 32px; flex: 1; }
-    .price-features li { font-size: 14px; color: var(--text2); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-    .price-features li::before { content: '✓'; color: var(--accent); font-weight: bold; }
-
-    /* =========== DASHBOARD ARXITEKTURASI (RESPONSIVE) =========== */
-    .page-dashboard { display: grid; grid-template-columns: 240px 1fr; gap: 30px; margin: 30px 0; align-items: start; }
-    .dash-sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; gap: 4px; }
-    .dash-nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: var(--text2); text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; transition: var(--transition); }
-    .dash-nav-item:hover, .dash-nav-item.active { background: var(--bg); color: #fff; }
-    .dash-nav-item.active { color: var(--accent); }
-    
-    .dash-main { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; min-height: 500px; }
-    .dash-page { display: none; animation: fadeIn 0.3s ease; }
-    
-    /* Stats & Layouts Inside Dashboard */
-    .dash-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
-    .stat-card { background: var(--bg); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); }
-    .stat-val { font-size: 28px; font-weight: 700; font-family: var(--font-head); margin-top: 4px; }
-    
-    .dash-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .dash-card { background: var(--bg); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); }
-
-    /* FOCUS TIMER WIDGET */
-    .timer-widget { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 24px; }
-    .timer-circle-wrap { position: relative; width: 140px; height: 140px; margin: 16px 0; }
-    .timer-circle { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(var(--accent) var(--prog, 100%), var(--border) 0); display: flex; align-items: center; justify-content: center; }
-    .timer-circle::after { content: ''; position: absolute; width: 124px; height: 124px; background: var(--bg); border-radius: 50%; }
-    .timer-display { position: absolute; font-family: var(--font-head); font-size: 24px; font-weight: 700; z-index: 1; }
-    .timer-controls { display: flex; gap: 8px; width: 100%; }
-    .timer-controls button { flex: 1; padding: 8px; border-radius: 6px; font-size: 13px; cursor: pointer; border: 1px solid var(--border); font-weight: 500; }
-
-    /* FORMS & SETTINGS SETUP */
+    .dash-nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--text2);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-weight: 400;
+    }
+    .dash-nav-item:hover { background: var(--bg2); color: var(--text); }
+    .dash-nav-item.active { background: var(--bg2); color: var(--text); font-weight: 500; }
+    .dash-nav-icon { font-size: 16px; width: 20px; text-align: center; }
+ 
+    .dash-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      min-height: 500px;
+    }
+    .dash-inner { display: none; }
+    .dash-inner.visible { display: block; }
+ 
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 24px 0 28px;
+    }
+    .dash-stat {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .dash-stat-lbl { font-size: 11px; color: var(--text3); font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .dash-stat-val { font-family: var(--font-serif); font-size: 32px; line-height: 1; }
+ 
+    .dash-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .dash-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .dash-card h4 { font-size: 14px; font-weight: 500; margin-bottom: 16px; }
+ 
+    /* Timer */
+    .timer-center { display: flex; flex-direction: column; align-items: center; }
+    .timer-ring-wrap { position: relative; width: 120px; height: 120px; margin: 12px auto; }
+    .timer-ring { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(var(--text) var(--prog, 100%), var(--bg3) 0); display: flex; align-items: center; justify-content: center; }
+    .timer-ring::after { content: ''; position: absolute; width: 104px; height: 104px; background: var(--bg); border-radius: 50%; }
+    .timer-time { position: absolute; font-family: var(--font-mono); font-size: 20px; font-weight: 500; z-index: 1; }
+    .timer-btns { display: flex; gap: 8px; width: 100%; margin-top: 12px; }
+    .timer-btns button {
+      flex: 1; padding: 8px; border-radius: 8px;
+      font-size: 12px; font-weight: 500;
+      cursor: pointer; border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: var(--font-sans);
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .timer-btns button.primary { background: var(--text); color: #fff; border-color: var(--text); }
+    .timer-btns button:hover { opacity: 0.85; }
+ 
+    /* Booking in dash */
+    .booking-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .booking-icon-box {
+      width: 44px; height: 44px;
+      background: var(--bg2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .booking-info { flex: 1; }
+    .booking-title { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+    .booking-sub { font-size: 12px; color: var(--text3); font-family: var(--font-mono); }
+ 
+    /* Pricing */
+    .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .plan-card {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 24px;
+      position: relative;
+      display: flex; flex-direction: column;
+    }
+    .plan-card.featured { border-color: var(--text); background: var(--surface); }
+    .plan-badge {
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 0 0 10px 10px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-name { font-size: 12px; color: var(--text3); font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+    .plan-price { font-family: var(--font-serif); font-size: 40px; margin-bottom: 4px; }
+    .plan-period { font-size: 12px; color: var(--text3); margin-bottom: 20px; }
+    .plan-features { list-style: none; margin-bottom: 24px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .plan-features li { font-size: 13px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .plan-features li::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+ 
+    /* Settings */
     .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 13px; color: var(--text2); margin-bottom: 6px; font-weight: 500; }
-    .form-control { width: 100%; background: var(--bg); border: 1px solid var(--border); padding: 10px 14px; border-radius: 6px; color: #fff; font-family: var(--font-body); font-size: 14px; transition: var(--transition); }
-    .form-control:focus { border-color: var(--accent); outline: none; }
-    .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-
-    /* =========== FAQ SECTION =========== */
-    .faq-section { margin: 60px 0; }
-    .faq-list { max-width: 800px; margin: 20px auto 0; display: flex; flex-direction: column; gap: 12px; }
-    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-    .faq-q { padding: 18px 24px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-    .faq-q .arrow { transition: transform 0.2s; font-size: 12px; color: var(--text3); }
-    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); color: var(--text2); font-size: 14px; }
-    .faq-item.open .faq-q { color: var(--accent); }
-    .faq-item.open .faq-q .arrow { transform: rotate(180deg); color: var(--accent); }
-    .faq-item.open .faq-a { padding-bottom: 24px; max-height: 200px; }
-
-    /* =========== MEDIA QUERIES (BREAKPOINTS) =========== */
-    @media (max-width: 900px) {
-      .page-dashboard { grid-template-columns: 1fr; }
-      .dash-sidebar { flex-direction: row; overflow-x: auto; white-space: nowrap; padding: 8px; }
-      .dash-nav-item { padding: 8px 14px; font-size: 13px; }
+    .form-label { display: block; font-size: 12px; color: var(--text3); margin-bottom: 6px; font-family: var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+    .form-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 11px 16px;
+      border-radius: 10px;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      transition: border-color 0.2s;
     }
-
+    .form-input:focus { border-color: rgba(26,25,22,0.4); outline: none; }
+    .form-input:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .check-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .check-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--text); }
+    .check-row span { font-size: 14px; color: var(--text); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+ 
+    /* ─── FAQ ─── */
+    .faq-wrap { max-width: 720px; margin: 48px auto 0; display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 20px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-arrow { font-size: 18px; color: var(--text3); transition: transform 0.25s, color 0.2s; }
+    .faq-a {
+      padding: 0 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-q { color: var(--gold); }
+    .faq-item.open .faq-arrow { transform: rotate(45deg); color: var(--gold); }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 22px; }
+ 
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border2);
+      padding: 36px 0;
+    }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-family: var(--font-serif); font-size: 18px; color: var(--text); }
+    .footer-logo em { color: var(--gold); font-style: normal; }
+    .footer-copy { font-size: 13px; color: var(--text3); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--text3); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+ 
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .solution-grid { grid-template-columns: 1fr; }
+      .dash-layout { grid-template-columns: 1fr; }
+      .dash-nav { position: static; display: flex; overflow-x: auto; gap: 4px; border-radius: 14px; }
+      .dash-stats { grid-template-columns: 1fr 1fr; }
+      .dash-two { grid-template-columns: 1fr; }
+      .plan-grid { grid-template-columns: 1fr; }
+    }
+ 
     @media (max-width: 768px) {
-      .menu-icon { display: block; }
-      .nav-links {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: var(--surface);
+      nav .nav-cta .btn, .nav-links { display: none; }
+      .ham { display: block; }
+      .mobile-menu {
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(247,245,240,0.97);
+        backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--border);
+        padding: 20px 28px;
+        display: none;
         flex-direction: column;
-        padding: 20px;
-        gap: 10px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
+        gap: 4px;
+        z-index: 190;
       }
-      #menu-toggle:checked ~ .nav-links { max-height: 400px; }
-      #menu-toggle:checked ~ .menu-icon div:nth-child(1) { transform: rotate(-45deg) translate(-5px, 5px); }
-      #menu-toggle:checked ~ .menu-icon div:nth-child(2) { opacity: 0; }
-      #menu-toggle:checked ~ .menu-icon div:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-      .hero { padding: 50px 0 20px; }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        font-size: 16px;
+        color: var(--text);
+        text-decoration: none;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border2);
+        cursor: pointer;
+        display: block;
+      }
+      .float-chip { display: none; }
+      .loc-grid { grid-template-columns: 1fr; }
+      .pod-pick-grid { grid-template-columns: repeat(3, 1fr); }
+      .final-cta { padding: 60px 28px; }
+      .avail-grid { padding: 20px; }
+      .dash-stats { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
     }
+ 
+    @media (max-width: 520px) {
+      .section { padding: 70px 0; }
+      .wizard-box { padding: 24px 20px; }
+      .pod-pick-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+ 
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
   </style>
 </head>
 <body>
-
-  <!-- =========== NAVIGATION BAR =========== -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <div class="logo" onclick="showPage('home')">Stu<span>Pod</span></div>
-      <input type="checkbox" id="menu-toggle">
-      <label Skinner for="menu-toggle" class="menu-icon">
-        <div></div><div></div><div></div>
-      </label>
-      <ul class="nav-links">
-        <li><a class="nav-link active" onclick="showPage('home'); setActive(this)">Home</a></li>
-        <li><a class="nav-link" onclick="showPage('book'); setActive(this)">Book Pod</a></li>
-        <li><a class="nav-link" onclick="showPage('buddy'); setActive(this)">StudyBuddy</a></li>
-        <li><a class="nav-link" onclick="showPage('secondbook'); setActive(this)">Secondbook</a></li>
-        <li><a class="nav-link" onclick="showPage('dashboard'); setActive(this); showDashPage('overview')">Dashboard</a></li>
-      </ul>
+ 
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="container nav-inner">
+    <a class="nav-logo" onclick="showPage('home')">Stu<em>Pod</em></a>
+ 
+    <ul class="nav-links">
+      <li><a class="active" onclick="showPage('home'); setNav(this)">Home</a></li>
+      <li><a onclick="showPage('book'); setNav(this)">Book Pod</a></li>
+      <li><a onclick="showPage('buddy'); setNav(this)">StudyBuddy</a></li>
+      <li><a onclick="showPage('market'); setNav(this)">Secondbook</a></li>
+      <li><a onclick="showPage('dash'); setNav(this); showDash('overview')">Dashboard</a></li>
+    </ul>
+ 
+    <div class="nav-cta">
+      <button class="btn btn-outline" onclick="showPage('book')">Book a Session</button>
     </div>
-  </header>
-
-  <main class="container">
-    
-    <!-- =========== PAGE: HOME =========== -->
-    <div id="page-home" class="page active">
-      <section class="hero">
-        <h1>Your Smart Campus Ecosystem</h1>
-        <p>Book soundproof study pods, find perfect study partners, and trade course materials directly with verified students on your campus.</p>
-        <button class="btn-primary" onclick="showPage('book'); document.querySelectorAll('.nav-link')[1].classList.add('active'); document.querySelectorAll('.nav-link')[0].classList.remove('active')">Book a Pod Now</button>
-      </section>
-
-      <section class="live-status-bar">
-        <h3 style="font-family:var(--font-head); font-size:18px;">Live Pod Availability</h3>
-        <p style="font-size:13px; color:var(--text2)">Click on any free slot to instantly reserve your session.</p>
-        <div class="pods-grid" id="hero-pods"></div>
-      </section>
-
-      <section class="features-grid">
-        <div class="feat-card">
-          <div class="feat-icon">🎧</div>
-          <h3>Acoustic Study Pods</h3>
-          <p>High-tech, soundproof spatial pods equipped with smart displays, fast charging, and climate control configurations.</p>
+ 
+    <button class="ham" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+ 
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="showPage('home'); closeMobile()">Home</a>
+  <a onclick="showPage('book'); closeMobile()">Book Pod</a>
+  <a onclick="showPage('buddy'); closeMobile()">StudyBuddy</a>
+  <a onclick="showPage('market'); closeMobile()">Secondbook</a>
+  <a onclick="showPage('dash'); closeMobile(); showDash('overview')">Dashboard</a>
+  <button class="btn btn-dark" style="width:100%; margin-top:12px; border-radius:10px;" onclick="showPage('book'); closeMobile()">Book a Session</button>
+</div>
+ 
+<main>
+ 
+<!-- ============================================================ -->
+<!--  HOME PAGE                                                  -->
+<!-- ============================================================ -->
+<div id="page-home" class="page active">
+ 
+  <!-- HERO -->
+  <section class="hero-wrap">
+    <div class="container">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Now open · Baku, Azerbaijan
+      </div>
+      <h1 class="hero-headline reveal">
+        Infrastructure<br>for <em>deep work.</em>
+      </h1>
+      <p class="hero-sub reveal reveal-d1">
+        Soundproof study spaces, smart booking, and a community built to help you do your best thinking.
+      </p>
+      <div class="hero-ctas reveal reveal-d2">
+        <button class="btn btn-dark" onclick="showPage('book')">Book a Session</button>
+        <button class="btn btn-outline" onclick="document.getElementById('solution-anchor').scrollIntoView({behavior:'smooth'})">Explore Ecosystem</button>
+      </div>
+ 
+      <!-- Pod Illustration -->
+      <div class="hero-pod-section reveal reveal-d3">
+        <div class="pod-stage">
+ 
+          <!-- Floating stat chips -->
+          <div class="float-chip chip-1">
+            <span class="val">16</span>
+            <span class="lbl">ACTIVE PODS</span>
+          </div>
+          <div class="float-chip chip-2">
+            <span class="val">68%</span>
+            <span class="lbl">WILLING TO PAY</span>
+          </div>
+          <div class="float-chip chip-3">
+            <span class="val">4.9★</span>
+            <span class="lbl">FOCUS SCORE</span>
+          </div>
+ 
+          <!-- SVG Pod Illustration -->
+          <div class="pod-visual">
+            <div class="pod-svg-wrap">
+              <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" style="max-width:480px; width:100%;">
+                <defs>
+                  <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#e8e5dc"/>
+                    <stop offset="100%" stop-color="#d4d0c6"/>
+                  </linearGradient>
+                  <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#c8c4b8"/>
+                    <stop offset="100%" stop-color="#b8b4a8"/>
+                  </linearGradient>
+                  <linearGradient id="deskGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#d4b896"/>
+                    <stop offset="100%" stop-color="#c4a882"/>
+                  </linearGradient>
+                  <linearGradient id="chairGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2a2820"/>
+                    <stop offset="100%" stop-color="#1a1916"/>
+                  </linearGradient>
+                  <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1e3a5f"/>
+                    <stop offset="100%" stop-color="#0d2240"/>
+                  </linearGradient>
+                </defs>
+ 
+                <!-- Back wall -->
+                <rect x="60" y="30" width="360" height="210" rx="4" fill="url(#wallGrad)"/>
+ 
+                <!-- Floor -->
+                <polygon points="40,240 440,240 480,300 0,300" fill="url(#floorGrad)"/>
+ 
+                <!-- Left wall accent -->
+                <rect x="60" y="30" width="4" height="210" fill="#c0bcb0"/>
+ 
+                <!-- Acoustic panel strips on back wall -->
+                <rect x="80" y="50" width="6" height="170" rx="3" fill="rgba(0,0,0,0.06)"/>
+                <rect x="96" y="50" width="6" height="170" rx="3" fill="rgba(0,0,0,0.04)"/>
+                <rect x="112" y="50" width="6" height="170" rx="3" fill="rgba(0,0,0,0.06)"/>
+                <rect x="358" y="50" width="6" height="170" rx="3" fill="rgba(0,0,0,0.06)"/>
+                <rect x="374" y="50" width="6" height="170" rx="3" fill="rgba(0,0,0,0.04)"/>
+                <rect x="390" y="50" width="6" height="170" rx="3" fill="rgba(0,0,0,0.06)"/>
+ 
+                <!-- Monitor stand / mount -->
+                <rect x="218" y="80" width="44" height="3" rx="1.5" fill="#a09c90"/>
+                <!-- Monitor -->
+                <rect x="168" y="40" width="144" height="90" rx="6" fill="url(#screenGrad)"/>
+                <rect x="170" y="42" width="140" height="86" rx="5" fill="#122540"/>
+                <!-- Screen glow / content -->
+                <rect x="178" y="50" width="100" height="6" rx="3" fill="rgba(99,153,255,0.5)"/>
+                <rect x="178" y="62" width="70" height="4" rx="2" fill="rgba(99,153,255,0.3)"/>
+                <rect x="178" y="72" width="90" height="4" rx="2" fill="rgba(99,153,255,0.2)"/>
+                <rect x="178" y="84" width="60" height="4" rx="2" fill="rgba(99,153,255,0.25)"/>
+                <rect x="178" y="94" width="80" height="4" rx="2" fill="rgba(99,153,255,0.2)"/>
+                <rect x="178" y="104" width="50" height="4" rx="2" fill="rgba(99,153,255,0.15)"/>
+                <!-- Small UI element -->
+                <rect x="286" y="50" width="18" height="18" rx="4" fill="rgba(184,149,42,0.4)"/>
+                <rect x="286" y="74" width="18" height="8" rx="2" fill="rgba(99,153,255,0.3)"/>
+ 
+                <!-- Desk -->
+                <rect x="100" y="180" width="280" height="14" rx="4" fill="url(#deskGrad)"/>
+                <rect x="100" y="192" width="280" height="4" rx="0" fill="rgba(0,0,0,0.08)"/>
+                <!-- Desk legs -->
+                <rect x="112" y="194" width="8" height="46" rx="3" fill="#b89870"/>
+                <rect x="360" y="194" width="8" height="46" rx="3" fill="#b89870"/>
+ 
+                <!-- Laptop on desk -->
+                <rect x="190" y="162" width="100" height="64" rx="4" fill="#2a2820" opacity="0.9"/>
+                <rect x="193" y="165" width="94" height="58" rx="3" fill="#1a1916"/>
+                <rect x="197" y="169" width="86" height="50" rx="2" fill="#122540"/>
+                <!-- Laptop screen content -->
+                <rect x="200" y="173" width="40" height="3" rx="1.5" fill="rgba(99,153,255,0.5)"/>
+                <rect x="200" y="179" width="30" height="2" rx="1" fill="rgba(99,153,255,0.3)"/>
+                <rect x="200" y="184" width="35" height="2" rx="1" fill="rgba(99,153,255,0.25)"/>
+                <!-- laptop base -->
+                <rect x="186" y="180" width="108" height="4" rx="2" fill="#2a2820"/>
+ 
+                <!-- Notebook on desk -->
+                <rect x="316" y="162" width="52" height="18" rx="2" fill="#ede8de"/>
+                <rect x="317" y="164" width="50" height="14" rx="1" fill="#f5f0e8"/>
+                <line x1="320" y1="167" x2="365" y2="167" stroke="#ddd8ce" stroke-width="1"/>
+                <line x1="320" y1="170" x2="365" y2="170" stroke="#ddd8ce" stroke-width="1"/>
+                <line x1="320" y1="173" x2="355" y2="173" stroke="#ddd8ce" stroke-width="1"/>
+                <!-- Pen -->
+                <rect x="372" y="161" width="4" height="20" rx="2" fill="#B8952A"/>
+ 
+                <!-- Coffee cup -->
+                <rect x="134" y="164" width="22" height="16" rx="4" fill="#fff" opacity="0.9"/>
+                <rect x="134" y="164" width="22" height="5" rx="2" fill="rgba(0,0,0,0.1)"/>
+                <path d="M156,170 Q162,170 162,174 Q162,178 156,178" stroke="#ddd" stroke-width="1.5" fill="none"/>
+ 
+                <!-- Chair back -->
+                <rect x="208" y="205" width="64" height="52" rx="10" fill="url(#chairGrad)"/>
+                <!-- Chair seat -->
+                <rect x="200" y="228" width="80" height="24" rx="8" fill="#252320"/>
+                <!-- Chair leg center -->
+                <rect x="235" y="250" width="10" height="28" rx="4" fill="#1a1916"/>
+                <!-- Chair base -->
+                <ellipse cx="240" cy="278" rx="35" ry="8" fill="#111110"/>
+                <!-- Chair wheels -->
+                <circle cx="210" cy="280" r="4" fill="#0d0d0c"/>
+                <circle cx="270" cy="280" r="4" fill="#0d0d0c"/>
+                <circle cx="240" cy="284" r="4" fill="#0d0d0c"/>
+ 
+                <!-- Lamp on desk -->
+                <rect x="152" y="148" width="4" height="32" rx="2" fill="#888"/>
+                <ellipse cx="154" cy="148" rx="16" ry="6" fill="#aaa"/>
+                <!-- Lamp glow -->
+                <ellipse cx="154" cy="185" rx="20" ry="4" fill="rgba(255,240,180,0.15)"/>
+ 
+                <!-- Ceiling light glow -->
+                <ellipse cx="240" cy="35" rx="60" ry="8" fill="rgba(255,248,220,0.2)"/>
+ 
+                <!-- Headphones on desk edge -->
+                <path d="M100,177 Q100,168 108,168 Q116,168 116,177" stroke="#444" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <rect x="97" y="177" width="6" height="5" rx="2" fill="#333"/>
+                <rect x="113" y="177" width="6" height="5" rx="2" fill="#333"/>
+ 
+                <!-- Gold accent — pod number badge on wall -->
+                <rect x="390" y="44" width="26" height="14" rx="4" fill="rgba(184,149,42,0.18)" stroke="rgba(184,149,42,0.4)" stroke-width="0.5"/>
+                <text x="403" y="54" text-anchor="middle" font-family="monospace" font-size="7" fill="#B8952A" font-weight="600">A3</text>
+              </svg>
+            </div>
+ 
+            <div class="pod-badges">
+              <div class="pod-badge"><span class="dot"></span> Soundproof</div>
+              <div class="pod-badge"><span class="dot"></span> Fast Wi-Fi</div>
+              <div class="pod-badge"><span class="dot"></span> USB-C Charging</div>
+              <div class="pod-badge"><span class="dot"></span> Climate Control</div>
+              <div class="pod-badge"><span class="dot"></span> Smart Booking</div>
+            </div>
+          </div>
         </div>
-        <div class="feat-card">
-          <div class="feat-icon">👥</div>
-          <h3>StudyBuddy Matching</h3>
-          <p>Our algorithm matches you with students taking the same classes or preparing for identical midterms/exams.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-icon">📖</div>
-          <h3>Secondbook Market</h3>
-          <p>Buy and sell textbooks, peer lecture bundles, and digital formula sheets safely within your campus radius.</p>
-        </div>
-      </section>
+      </div>
     </div>
-
-    <!-- =========== PAGE: BOOK POD =========== -->
-    <div id="page-book" class="page">
-      <div class="wizard-container">
-        <div class="step-indicator">
-          <div class="step-dot active" id="sdot1">1</div>
-          <div class="step-line" id="sline1"></div>
-          <div class="step-dot" id="sdot2">2</div>
-          <div class="step-line" id="sline2"></div>
-          <div class="step-dot" id="sdot3">3</div>
-          <div class="step-line" id="sline3"></div>
-          <div class="step-dot" id="sdot4">4</div>
+  </section>
+ 
+  <!-- PROBLEMS -->
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">The Problem</div>
+        <h2 style="font-size:clamp(32px,4vw,52px); letter-spacing:-0.03em; margin-top:14px; max-width:600px;">Students deserve better than a crowded café.</h2>
+      </div>
+      <div class="problems-grid reveal reveal-d1">
+        <div class="problem-cell">
+          <span class="problem-num">01</span>
+          <div class="problem-title">Constant Distraction</div>
+          <div class="problem-desc">Open spaces and noise kill deep focus within minutes of sitting down.</div>
         </div>
-
+        <div class="problem-cell">
+          <span class="problem-num">02</span>
+          <div class="problem-title">No Reserved Space</div>
+          <div class="problem-desc">Libraries fill up. Cafés are loud. There's no reliable, bookable quiet space.</div>
+        </div>
+        <div class="problem-cell">
+          <span class="problem-num">03</span>
+          <div class="problem-title">Fragmented Resources</div>
+          <div class="problem-desc">Notes, textbooks, and study tools are scattered with no central hub.</div>
+        </div>
+        <div class="problem-cell">
+          <span class="problem-num">04</span>
+          <div class="problem-title">No Accountability</div>
+          <div class="problem-desc">74% of students say accountability would improve their study habits significantly.</div>
+        </div>
+        <div class="problem-cell">
+          <span class="problem-num">05</span>
+          <div class="problem-title">Burnout Culture</div>
+          <div class="problem-desc">Without structure and environment, students push harder with diminishing returns.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- SOLUTION -->
+  <section class="section" id="solution-anchor">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">The Ecosystem</div>
+        <h2 style="font-size:clamp(32px,4vw,52px); letter-spacing:-0.03em; margin-top:14px;">Three pillars. One campus.</h2>
+      </div>
+      <div class="solution-grid">
+        <div class="solution-card reveal reveal-d1">
+          <div class="sol-icon">🏛</div>
+          <div class="sol-card-label">Space</div>
+          <div class="sol-title">Premium Study Pods</div>
+          <div class="sol-desc">Thoughtfully designed soundproof environments that signal your brain it's time to focus.</div>
+          <ul class="sol-items">
+            <li>Acoustic foam + soundproof glass</li>
+            <li>Ergonomic desk & premium chair</li>
+            <li>Height-adjustable surfaces</li>
+            <li>Climate-controlled microclimate</li>
+          </ul>
+        </div>
+        <div class="solution-card reveal reveal-d2">
+          <div class="sol-icon">⚡</div>
+          <div class="sol-card-label">Platform</div>
+          <div class="sol-title">Smart Booking</div>
+          <div class="sol-desc">Reserve your pod in seconds. Walk in. Scan. Focus. The friction is gone.</div>
+          <ul class="sol-items">
+            <li>Live availability map</li>
+            <li>QR code pod entry</li>
+            <li>Pomodoro focus timer</li>
+            <li>Session analytics dashboard</li>
+          </ul>
+        </div>
+        <div class="solution-card reveal reveal-d3">
+          <div class="sol-icon">🤝</div>
+          <div class="sol-card-label">Community</div>
+          <div class="sol-title">StudyBuddy + Market</div>
+          <div class="sol-desc">Find study partners matched to your courses. Trade textbooks. Build accountability.</div>
+          <ul class="sol-items">
+            <li>Algorithm-matched study partners</li>
+            <li>Course-aligned pairing</li>
+            <li>Peer textbook marketplace</li>
+            <li>Notes & resource sharing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- LIVE AVAILABILITY -->
+  <section class="section" style="padding-top:20px;">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Live Status</div>
+        <h2 style="font-size:clamp(28px,3.5vw,44px); letter-spacing:-0.03em; margin-top:14px;">Pod availability, right now.</h2>
+      </div>
+      <div class="avail-wrap reveal reveal-d1">
+        <div class="avail-header">
+          <div>
+            <div class="avail-title">City Campus Center — Main Library, 3rd Floor</div>
+            <div style="font-size:13px; color:var(--text3); margin-top:4px; font-family:var(--font-mono);">Updated live · <span id="avail-time">—</span></div>
+          </div>
+          <div class="live-badge">Live</div>
+        </div>
+        <div class="avail-grid" id="avail-grid"></div>
+        <div class="avail-footer">
+          <div class="avail-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#22C55E;"></div> Available</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#d0cdc5;"></div> Occupied</div>
+            <div class="legend-item" id="avail-selected-info" style="display:none;"><div class="legend-dot" style="background:#1A1916;"></div> <span id="avail-selected-name">Selected</span></div>
+          </div>
+          <button class="btn btn-dark" onclick="showPage('book')" style="font-size:13px; padding:10px 20px;">Book Selected Pod →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- BUDDY PREVIEW -->
+  <section class="section">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;" class="reveal">
+        <div>
+          <div class="label">StudyBuddy</div>
+          <h2 style="font-size:clamp(28px,3.5vw,44px); letter-spacing:-0.03em; margin-top:14px;">Your next study partner<br>is already here.</h2>
+        </div>
+        <button class="btn btn-outline" onclick="showPage('buddy')" style="flex-shrink:0;">Browse All →</button>
+      </div>
+      <div class="buddy-grid" id="buddy-preview"></div>
+    </div>
+  </section>
+ 
+  <!-- SECONDBOOK PREVIEW -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px;" class="reveal">
+        <div>
+          <div class="label">Secondbook</div>
+          <h2 style="font-size:clamp(28px,3.5vw,44px); letter-spacing:-0.03em; margin-top:14px;">Course materials, peer-priced.</h2>
+          <p style="font-size:15px; color:var(--text2); margin-top:10px; max-width:480px;">Trade textbooks, lecture notes, and digital resources within your verified campus community.</p>
+        </div>
+        <button class="btn btn-outline" onclick="showPage('market')" style="flex-shrink:0;">Open Market →</button>
+      </div>
+      <div class="books-row" id="books-preview"></div>
+    </div>
+  </section>
+ 
+  <!-- STATS / VALIDATION -->
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Validation</div>
+        <h2 style="font-size:clamp(28px,3.5vw,44px); letter-spacing:-0.03em; margin-top:14px;">Students told us what they need.</h2>
+        <p style="font-size:15px; color:var(--text2); margin-top:10px;">Survey of 50+ students across Baku universities.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card reveal reveal-d1">
+          <div class="label">Materials</div>
+          <div class="stat-number">73%</div>
+          <div class="stat-desc">struggle to find study materials on a regular basis</div>
+        </div>
+        <div class="stat-card reveal reveal-d2">
+          <div class="label">Community</div>
+          <div class="stat-number">74%</div>
+          <div class="stat-desc">say accountability and community would meaningfully improve their outcomes</div>
+        </div>
+        <div class="stat-card reveal reveal-d3">
+          <div class="label">Willingness</div>
+          <div class="stat-number">68%</div>
+          <div class="stat-desc">are willing to pay 4 AZN/hour for a premium, quiet study environment</div>
+        </div>
+        <div class="stat-card reveal reveal-d4">
+          <div class="label">Experience</div>
+          <div class="stat-number">46%</div>
+          <div class="stat-desc">rated a healthy, curated food & wellness ecosystem as a 10/10 priority feature</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FAQ -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="reveal" style="text-align:center;">
+        <div class="label" style="justify-content:center;">FAQ</div>
+        <h2 style="font-size:clamp(28px,3.5vw,44px); letter-spacing:-0.03em; margin-top:14px;">Common questions</h2>
+      </div>
+      <div class="faq-wrap reveal reveal-d1" id="faq-list"></div>
+    </div>
+  </section>
+ 
+  <!-- FINAL CTA -->
+  <div class="container">
+    <div class="final-cta reveal">
+      <h2>The future of focus<br><em>starts here.</em></h2>
+      <p>Join hundreds of students who have already reclaimed their study time.</p>
+      <button class="btn btn-dark" onclick="showPage('book')">Book Your First Session →</button>
+    </div>
+  </div>
+ 
+</div>
+<!-- END HOME -->
+ 
+ 
+<!-- ============================================================ -->
+<!--  BOOK PAGE                                                  -->
+<!-- ============================================================ -->
+<div id="page-book" class="page">
+  <div class="wizard-page">
+    <div class="container">
+ 
+      <div style="text-align:center; margin-bottom:40px;">
+        <div class="label" style="justify-content:center;">Session Booking</div>
+        <h2 style="font-size:clamp(28px,4vw,48px); letter-spacing:-0.03em; margin-top:14px;">Reserve your pod.</h2>
+        <p style="font-size:15px; color:var(--text2); margin-top:8px;">Takes under a minute.</p>
+      </div>
+ 
+      <div class="wizard-box">
+        <!-- Step indicator -->
+        <div class="wiz-steps">
+          <div class="wiz-dot active" id="wd1">1</div>
+          <div class="wiz-line" id="wl1"></div>
+          <div class="wiz-dot" id="wd2">2</div>
+          <div class="wiz-line" id="wl2"></div>
+          <div class="wiz-dot" id="wd3">3</div>
+          <div class="wiz-line" id="wl3"></div>
+          <div class="wiz-dot" id="wd4">4</div>
+        </div>
+ 
         <!-- Step 1: Location -->
-        <div id="bstep1">
-          <h2>Select Campus Location</h2>
-          <div class="location-grid">
-            <div class="wizard-card card" onclick="selectLocation(this, 'City Campus Center')">
-              <h3 style="font-size:16px;">City Campus Center</h3>
-              <p style="font-size:13px; color:var(--text3); margin-top:4px;">Main Library, 3rd Floor</p>
-              <div style="font-size:12px; color:var(--green); margin-top:12px; font-weight:500;">12 Pods Available</div>
+        <div class="wiz-section visible" id="ws1">
+          <div class="wiz-step-title">Choose location</div>
+          <div class="wiz-step-sub">Select your campus hub</div>
+          <div class="loc-grid">
+            <div class="wiz-card" onclick="pickLocation(this, 'City Campus Center')">
+              <h4>City Campus Center</h4>
+              <p>Main Library, 3rd Floor</p>
+              <span class="avail-count">12 pods available</span>
             </div>
-            <div class="wizard-card card" onclick="selectLocation(this, 'Engineering Tech Hub')">
-              <h3 style="font-size:16px;">Engineering Tech Hub</h3>
-              <p style="font-size:13px; color:var(--text3); margin-top:4px;">Block B, Innovation Lab</p>
-              <div style="font-size:12px; color:var(--green); margin-top:12px; font-weight:500;">4 Pods Available</div>
+            <div class="wiz-card" onclick="pickLocation(this, 'Engineering Tech Hub')">
+              <h4>Engineering Tech Hub</h4>
+              <p>Block B, Innovation Lab</p>
+              <span class="avail-count">4 pods available</span>
             </div>
           </div>
         </div>
-
-        <!-- Step 2: Pod Select -->
-        <div id="bstep2" style="display:none;">
-          <h2>Choose a Smart Pod</h2>
-          <p style="font-size:13px; color:var(--text3)">Select your preferred layout environment:</p>
-          <div class="pod-select-grid" id="pod-select-grid"></div>
+ 
+        <!-- Step 2: Pod -->
+        <div class="wiz-section" id="ws2">
+          <div class="wiz-step-title">Choose pod</div>
+          <div class="wiz-step-sub">Available pods at your selected location</div>
+          <div class="pod-pick-grid" id="pod-pick-grid"></div>
         </div>
-
-        <!-- Step 3: Time Selection -->
-        <div id="bstep3" style="display:none;">
-          <h2>Select Time & Duration</h2>
-          <p id="selected-date" style="font-size:14px; color:var(--accent); font-weight:600; margin-top:4px;"></p>
-          <div style="display:flex; gap:8px; margin-top:16px;" class="match-filter">
-            <button class="filter-btn active" onclick="selectDuration(this, '1h')">1 Hour</button>
-            <button class="filter-btn" onclick="selectDuration(this, '2h')">2 Hours</button>
-            <button class="filter-btn" onclick="selectDuration(this, '4h')">4 Hours</button>
+ 
+        <!-- Step 3: Time -->
+        <div class="wiz-section" id="ws3">
+          <div class="wiz-step-title">Select time</div>
+          <div class="wiz-step-sub" id="wiz-date-display"></div>
+          <div class="dur-row">
+            <button class="dur-btn active" onclick="pickDur(this,'1 hour')">1 Hour</button>
+            <button class="dur-btn" onclick="pickDur(this,'2 hours')">2 Hours</button>
+            <button class="dur-btn" onclick="pickDur(this,'4 hours')">4 Hours</button>
           </div>
-          <div class="time-grid" id="time-slots"></div>
+          <div class="time-grid" id="wiz-time-grid"></div>
         </div>
-
-        <!-- Step 4: Final Confirmation -->
-        <div id="bstep4" style="display:none;">
-          <h2>Confirm Booking Session</h2>
-          <div style="background:var(--bg); border:1px solid var(--border); padding:20px; border-radius:var(--radius); margin:20px 0;">
-            <div style="font-size:12px; text-transform:uppercase; color:var(--text3); letter-spacing:0.5px;">Reservation Asset</div>
-            <div id="confirm-details" style="font-size:18px; font-weight:700; font-family:var(--font-head); margin:4px 0 14px;"></div>
-            <div style="font-size:12px; text-transform:uppercase; color:var(--text3); letter-spacing:0.5px;">Scheduled Window</div>
-            <div id="confirm-time" style="font-size:16px; font-weight:600; color:#fff; margin-top:4px;"></div>
+ 
+        <!-- Step 4: Confirm -->
+        <div class="wiz-section" id="ws4">
+          <div class="wiz-step-title">Confirm booking</div>
+          <div class="wiz-step-sub">Review and confirm your session</div>
+          <div class="confirm-box">
+            <div class="confirm-row">
+              <span class="confirm-label">Location</span>
+              <span class="confirm-val" id="cf-loc">—</span>
+            </div>
+            <div class="confirm-row">
+              <span class="confirm-label">Pod</span>
+              <span class="confirm-val" id="cf-pod">—</span>
+            </div>
+            <div class="confirm-row">
+              <span class="confirm-label">Date</span>
+              <span class="confirm-val" id="cf-date">—</span>
+            </div>
+            <div class="confirm-row">
+              <span class="confirm-label">Time & Duration</span>
+              <span class="confirm-val" id="cf-time">—</span>
+            </div>
           </div>
-          <button class="btn-primary" style="width:100%" onclick="showPage('dashboard'); showDashPage('bookings'); alert('Booking confirmed successfully!')">Confirm & Generate QR Code</button>
+          <button class="btn btn-dark" style="width:100%; justify-content:center; border-radius:12px;" onclick="confirmBook()">Confirm & Generate QR Code →</button>
         </div>
       </div>
+ 
     </div>
-
-    <!-- =========== PAGE: STUDYBUDDY MATCHING =========== -->
-    <div id="page-buddy" class="page">
-      <div class="page-header">
+  </div>
+</div>
+ 
+ 
+<!-- ============================================================ -->
+<!--  STUDYBUDDY PAGE                                            -->
+<!-- ============================================================ -->
+<div id="page-buddy" class="page">
+  <div style="padding-top:110px; padding-bottom:80px;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; margin-bottom:32px;">
         <div>
-          <h2>Find a StudyBuddy</h2>
-          <p style="font-size:14px; color:var(--text2)">Instant, algorithm-driven matches filtered by shared curriculum tracks.</p>
+          <div class="label">StudyBuddy</div>
+          <h2 style="font-size:clamp(28px,4vw,48px); letter-spacing:-0.03em; margin-top:14px;">Find your partner in focus.</h2>
+          <p style="font-size:15px; color:var(--text2); margin-top:8px;">Algorithm-matched by courses, study style, and availability.</p>
         </div>
-        <div class="match-filter">
-          <button class="filter-btn active">All Departments</button>
-          <button class="filter-btn">Computer Science</button>
-          <button class="filter-btn">Mathematics</button>
-          <button class="filter-btn">Medicine</button>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;" id="buddy-filters">
+          <button class="dur-btn active">All</button>
+          <button class="dur-btn">CS</button>
+          <button class="dur-btn">Maths</button>
+          <button class="dur-btn">Medicine</button>
+          <button class="dur-btn">Law</button>
         </div>
       </div>
-      <div class="buddy-list" id="buddy-list"></div>
+      <div class="buddy-grid" id="buddy-full"></div>
     </div>
-
-    <!-- =========== PAGE: SECONDBOOK MARKETPLACE =========== -->
-    <div id="page-secondbook" class="page">
-      <div class="page-header">
+  </div>
+</div>
+ 
+ 
+<!-- ============================================================ -->
+<!--  MARKET PAGE                                                -->
+<!-- ============================================================ -->
+<div id="page-market" class="page">
+  <div style="padding-top:110px; padding-bottom:80px;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; margin-bottom:32px;">
         <div>
-          <h2>Secondbook Marketplace</h2>
-          <p style="font-size:14px; color:var(--text2)">Acquire peer course documentation or transfer ownership of local literature assets.</p>
+          <div class="label">Secondbook</div>
+          <h2 style="font-size:clamp(28px,4vw,48px); letter-spacing:-0.03em; margin-top:14px;">Knowledge has a second life.</h2>
+          <p style="font-size:15px; color:var(--text2); margin-top:8px;">Peer-to-peer textbook and notes exchange, verified by campus email.</p>
         </div>
-        <button class="btn-primary">+ List a Book</button>
+        <button class="btn btn-dark" style="font-size:13px; padding:11px 22px;">+ List a Resource</button>
       </div>
-      <div class="books-grid" id="books-grid"></div>
+      <div class="books-row" id="books-full"></div>
     </div>
-
-    <!-- =========== PAGE: DASHBOARD PANELS =========== -->
-    <div id="page-dashboard" class="page">
-      <div class="page-dashboard">
-        
-        <!-- Sidebar Menu Items -->
-        <div class="dash-sidebar">
-          <div class="dash-nav-item active" onclick="showDashPage('overview', this)">📊 Overview</div>
-          <div class="dash-nav-item" onclick="showDashPage('bookings', this)">🔑 My Bookings</div>
-          <div class="dash-nav-item" onclick="showDashPage('wallet', this)">💳 Credits & Plans</div>
-          <div class="dash-nav-item" onclick="showDashPage('settings', this)">⚙️ Settings</div>
+  </div>
+</div>
+ 
+ 
+<!-- ============================================================ -->
+<!--  DASHBOARD PAGE                                             -->
+<!-- ============================================================ -->
+<div id="page-dash" class="page">
+  <div class="dash-page-wrap">
+    <div class="container">
+      <div class="dash-layout">
+ 
+        <!-- Sidebar -->
+        <div class="dash-nav">
+          <div class="dash-nav-item active" onclick="showDash('overview',this)">
+            <span class="dash-nav-icon">◻</span> Overview
+          </div>
+          <div class="dash-nav-item" onclick="showDash('bookings',this)">
+            <span class="dash-nav-icon">🔑</span> Bookings
+          </div>
+          <div class="dash-nav-item" onclick="showDash('wallet',this)">
+            <span class="dash-nav-icon">◈</span> Plans
+          </div>
+          <div class="dash-nav-item" onclick="showDash('settings',this)">
+            <span class="dash-nav-icon">⊙</span> Settings
+          </div>
         </div>
-
-        <!-- Main Dashboard Render Window -->
-        <div class="dash-main">
-          
-          <!-- Inner Page 1: Overview -->
-          <div id="dash-overview" class="dash-page" style="display:block;">
-            <h2>Welcome back, Alex</h2>
-            <p style="color:var(--text2); font-size:14px; margin-bottom:20px;">Here is your campus status summary for today.</p>
-            
+ 
+        <!-- Main -->
+        <div class="dash-content">
+ 
+          <!-- Overview -->
+          <div class="dash-inner visible" id="dash-overview">
+            <h3 style="font-family:var(--font-serif); font-size:28px; letter-spacing:-0.02em;">Good afternoon, Alex.</h3>
+            <p style="font-size:14px; color:var(--text3); margin-top:4px; font-family:var(--font-mono);">FRIDAY · CAMPUS STATUS ACTIVE</p>
             <div class="dash-stats">
-              <div class="stat-card">
-                <div style="font-size:12px; color:var(--text3); font-weight:600; text-transform:uppercase;">Booking Credits</div>
-                <div class="stat-val" style="color:var(--accent);">8 / 12</div>
+              <div class="dash-stat">
+                <div class="dash-stat-lbl">Credits</div>
+                <div class="dash-stat-val">8 / 12</div>
               </div>
-              <div class="stat-card">
-                <div style="font-size:12px; color:var(--text3); font-weight:600; text-transform:uppercase;">Focus Time</div>
-                <div class="stat-val" style="color:var(--accent3);">14.5h</div>
+              <div class="dash-stat">
+                <div class="dash-stat-lbl">Focus Time</div>
+                <div class="dash-stat-val">14.5h</div>
               </div>
-              <div class="stat-card">
-                <div style="font-size:12px; color:var(--text3); font-weight:600; text-transform:uppercase;">Market Earnings</div>
-                <div class="stat-val" style="color:var(--green);">$38.00</div>
+              <div class="dash-stat">
+                <div class="dash-stat-lbl">Earnings</div>
+                <div class="dash-stat-val">$38</div>
               </div>
             </div>
-
-            <div class="dash-grid-2">
+            <div class="dash-two">
               <div class="dash-card">
-                <h3>Active Focus Session</h3>
-                <div class="timer-widget">
-                  <div class="timer-circle-wrap">
-                    <div class="timer-circle" id="timer-circle"></div>
-                    <div class="timer-display" id="timer-display">25:00</div>
+                <h4>Focus Session</h4>
+                <div class="timer-center">
+                  <div class="timer-ring-wrap">
+                    <div class="timer-ring" id="dash-ring"></div>
+                    <div class="timer-time" id="dash-time">25:00</div>
                   </div>
-                  <div class="timer-controls">
-                    <button id="timer-btn" class="btn-primary" onclick="toggleTimer()">▶ Start</button>
+                  <div class="timer-btns">
+                    <button class="primary" id="dash-timer-btn" onclick="toggleTimer()">▶ Start</button>
                     <button onclick="resetTimer()">Reset</button>
                   </div>
                 </div>
               </div>
               <div class="dash-card">
-                <h3>Next Active Session</h3>
-                <div style="margin-top:20px; display:flex; align-items:center; gap:16px;">
-                  <div style="font-size:32px;">🎧</div>
+                <h4>Next Session</h4>
+                <div style="display:flex; gap:14px; align-items:center; margin-bottom:20px;">
+                  <div style="width:44px;height:44px;background:var(--bg2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🎧</div>
                   <div>
-                    <div style="font-weight:600;">Pod A3 (City Campus)</div>
-                    <div style="font-size:13px; color:var(--text2)">Today · 14:00 - 15:00</div>
+                    <div style="font-weight:500;font-size:15px;">Pod A3 · City Campus</div>
+                    <div style="font-size:12px;color:var(--text3);font-family:var(--font-mono);margin-top:2px;">TODAY · 14:00 – 15:00</div>
                   </div>
                 </div>
-                <button class="btn-primary" style="width:100%; margin-top:24px; background:var(--surface-card); border:1px solid var(--border); color:#fff">View Entry QR Code</button>
+                <button class="btn btn-outline" style="width:100%; justify-content:center; border-radius:10px; font-size:13px;">View Entry QR Code</button>
               </div>
             </div>
           </div>
-
-          <!-- Inner Page 2: My Bookings -->
-          <div id="dash-bookings" class="dash-page">
-            <h2>Your Active Bookings</h2>
-            <div style="margin-top:20px; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius); padding:20px; display:flex; flex-wrap:wrap; justify-content:between; align-items:center; justify-content: space-between; gap:16px;">
-              <div style="display:flex; align-items:center; gap:16px;">
-                <div style="width:48px; height:48px; background:rgba(99,102,241,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px;">🎧</div>
-                <div>
-                  <div style="font-weight:700;">Pod A3 · City Campus Center</div>
-                  <div style="font-size:13px; color:var(--text3);">Today, May 21 · 14:00 - 15:00 (1 hour)</div>
+ 
+          <!-- Bookings -->
+          <div class="dash-inner" id="dash-bookings">
+            <h3 style="font-family:var(--font-serif); font-size:28px; letter-spacing:-0.02em;">My Bookings</h3>
+            <div class="booking-item">
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div class="booking-icon-box">🎧</div>
+                <div class="booking-info">
+                  <div class="booking-title">Pod A3 · City Campus Center</div>
+                  <div class="booking-sub">TODAY · 14:00 – 15:00 · 1 HOUR</div>
                 </div>
               </div>
-              <div style="display:flex; gap:10px;">
-                <button class="filter-btn">Cancel</button>
-                <button class="btn-primary" style="padding:8px 16px; font-size:13px;">Show QR</button>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-outline" style="font-size:13px;padding:9px 16px;border-radius:10px;">Cancel</button>
+                <button class="btn btn-dark" style="font-size:13px;padding:9px 16px;border-radius:10px;">Show QR</button>
               </div>
             </div>
           </div>
-
-          <!-- Inner Page 3: Pricing Plans & Wallet -->
-          <div id="dash-wallet" class="dash-page">
-            <h2>Subscription Tiers & Plan Status</h2>
-            <p style="color:var(--text2); font-size:14px;">Select the dynamic allocation threshold that scales your academic productivity ecosystem.</p>
-            
-            <div class="pricing-grid">
-              <!-- Tier 1 -->
-              <div class="price-card">
-                <div class="price-name">Student Tier</div>
-                <div class="price-amount">$0<span>/ month</span></div>
-                <div class="price-desc">Standard access matrix for basic functional routines.</div>
-                <ul class="price-features">
-                  <li>3 Booking credits / month</li>
-                  <li>Max 1 hour session duration</li>
-                  <li>Standard StudyBuddy matching</li>
-                  <li>Basic Marketplace listings</li>
+ 
+          <!-- Plans -->
+          <div class="dash-inner" id="dash-wallet">
+            <h3 style="font-family:var(--font-serif); font-size:28px; letter-spacing:-0.02em;">Plans</h3>
+            <p style="font-size:14px; color:var(--text2); margin-top:6px; margin-bottom:0;">Choose the tier that fits your study rhythm.</p>
+            <div class="plan-grid">
+              <div class="plan-card">
+                <div class="plan-name">Student</div>
+                <div class="plan-price">$0</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                  <li>3 booking credits/month</li>
+                  <li>Max 1-hour sessions</li>
+                  <li>Standard matching</li>
+                  <li>Basic marketplace</li>
                 </ul>
-                <button class="btn-primary" style="background:var(--surface-card); color:var(--text3); cursor:not-allowed;">Current Plan</button>
+                <button class="btn btn-outline" style="justify-content:center;border-radius:10px;width:100%;cursor:default;opacity:0.6;">Current Plan</button>
               </div>
-              <!-- Tier 2 -->
-              <div class="price-card popular">
-                <div class="price-name">Scholar Pro</div>
-                <div class="price-amount">$9<span>/ month</span></div>
-                <div class="price-desc">Advanced tiering metrics optimized for active academic cycles.</div>
-                <ul class="price-features">
-                  <li>15 Booking credits / month</li>
-                  <li>Up to 4 hour sessions</li>
-                  <li>Priority StudyBuddy pairing algorithms</li>
-                  <li>Unlimited marketplace sales profiles</li>
-                  <li>Advanced usage analytics tools</li>
+              <div class="plan-card featured">
+                <div class="plan-badge">Popular</div>
+                <div class="plan-name">Scholar Pro</div>
+                <div class="plan-price">$9</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                  <li>15 booking credits/month</li>
+                  <li>Up to 4-hour sessions</li>
+                  <li>Priority matching</li>
+                  <li>Unlimited marketplace</li>
+                  <li>Analytics dashboard</li>
                 </ul>
-                <button class="btn-primary">Upgrade to Pro</button>
+                <button class="btn btn-dark" style="justify-content:center;border-radius:10px;width:100%;">Upgrade to Pro</button>
               </div>
-              <!-- Tier 3 -->
-              <div class="price-card">
-                <div class="price-name">Research Elite</div>
-                <div class="price-amount">$19<span>/ month</span></div>
-                <div class="price-desc">Unrestricted computational configuration profiles.</div>
-                <ul class="price-features">
-                  <li>Unlimited booking allocation capacity</li>
-                  <li>Extended reservation windows (24h)</li>
-                  <li>Instant automatic match systems</li>
-                  <li>Zero processing fees on sales data</li>
+              <div class="plan-card">
+                <div class="plan-name">Research Elite</div>
+                <div class="plan-price">$19</div>
+                <div class="plan-period">per month</div>
+                <ul class="plan-features">
+                  <li>Unlimited bookings</li>
+                  <li>Extended windows (24h)</li>
+                  <li>Instant auto-match</li>
+                  <li>Zero marketplace fees</li>
                 </ul>
-                <button class="btn-primary">Go Premium</button>
+                <button class="btn btn-dark" style="justify-content:center;border-radius:10px;width:100%;">Go Elite</button>
               </div>
             </div>
           </div>
-
-          <!-- Inner Page 4: Settings Forms -->
-          <div id="dash-settings" class="dash-page">
-            <h2>Account Profiles & Settings</h2>
-            <div style="margin-top:24px; display:flex; flex-direction:column; gap:24px;">
+ 
+          <!-- Settings -->
+          <div class="dash-inner" id="dash-settings">
+            <h3 style="font-family:var(--font-serif); font-size:28px; letter-spacing:-0.02em;">Account Settings</h3>
+            <div style="margin-top:24px;">
               <div class="form-row">
                 <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" class="form-control" value="Alex">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-input" value="Alex">
                 </div>
                 <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control" value="Mercer">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" class="form-input" value="Mercer">
                 </div>
               </div>
               <div class="form-group">
-                <label>Institutional Email Endpoint Address</label>
-                <input type="email" class="form-control" value="a.mercer@university.edu" disabled>
+                <label class="form-label">Institutional Email</label>
+                <input type="email" class="form-input" value="a.mercer@university.edu" disabled>
               </div>
-              
-              <div style="border-top:1px solid var(--border); padding-top:20px;">
-                <h3 style="font-size:16px; margin-bottom:16px;">Notification Matrices</h3>
-                <div style="display:flex; flex-direction:column; gap:12px;">
-                  <div style="display:flex; align-items:center; gap:10px">
-                    <input type="checkbox" checked style="width:16px; height:16px; accent-color:var(--accent)"/>
-                    <span style="font-size:14px; color:var(--text)">Pod booking confirmation receipts</span>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:10px">
-                    <input type="checkbox" checked style="width:16px; height:16px; accent-color:var(--accent)"/>
-                    <span style="font-size:14px; color:var(--text)">StudyBuddy requests</span>
-                  </div>
-                </div>
-                <button class="btn-primary" style="width:fit-content; margin-top:24px;">Save Changes</button>
-              </div>
+              <hr class="section-divider">
+              <h4 style="font-size:15px; font-weight:500; margin-bottom:16px;">Notifications</h4>
+              <div class="check-row"><input type="checkbox" checked><span>Booking confirmation receipts</span></div>
+              <div class="check-row"><input type="checkbox" checked><span>StudyBuddy connection requests</span></div>
+              <div class="check-row"><input type="checkbox"><span>Marketplace activity</span></div>
+              <button class="btn btn-dark" style="margin-top:24px; border-radius:10px; font-size:13px;">Save Changes</button>
             </div>
           </div>
-
+ 
         </div>
       </div>
     </div>
-
-    <!-- =========== GLOBAL SYSTEM SUBCOMPONENTS: FAQ =========== -->
-    <section class="faq-section">
-      <h2 style="text-align:center;">Frequently Asked Inquiries</h2>
-      <div class="faq-list" id="faq-list"></div>
-    </section>
-
-  </main>
-
-  <!-- =========== CORE APPLICATION LOGIC SYSTEM =========== -->
-  <script>
-    // =========== NAVIGATION MANAGEMENT SYSTEM ===========
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const targetPage = document.getElementById('page-' + id);
-      if (targetPage) targetPage.classList.add('active');
-      window.scrollTo(0, 0);
-      
-      // Close mobile menu if open
-      document.getElementById('menu-toggle').checked = false;
+  </div>
+</div>
+ 
+</main>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">Stu<em>Pod</em></div>
+    <div class="footer-copy">© 2025 StuPod. Built for focused students.</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+ 
+ 
+<script>
+  // ─── DATA ───
+  const BUDDIES = [
+    {init:'SA',bg:'rgba(139,92,246,.12)',tc:'#7c3aed',name:'Sabrina A.',course:'Computer Science · 3rd year',tags:['Algorithms','Data Structures','Mornings'],match:94,online:true},
+    {init:'MR',bg:'rgba(16,185,129,.12)',tc:'#059669',name:'Marcus R.',course:'Data Science · 2nd year',tags:['Statistics','Machine Learning'],match:89,online:true},
+    {init:'LK',bg:'rgba(245,158,11,.12)',tc:'#d97706',name:'Leila K.',course:'Medicine · 4th year',tags:['Biochemistry','Anatomy','Weekends'],match:85,online:false},
+    {init:'RM',bg:'rgba(244,63,94,.12)',tc:'#e11d48',name:'Rauf M.',course:'Law · 2nd year',tags:['Constitutional Law','Mornings'],match:80,online:true},
+    {init:'EV',bg:'rgba(6,182,212,.12)',tc:'#0891b2',name:'Elena V.',course:'Engineering · 3rd year',tags:['Thermodynamics','Mechanics'],match:78,online:false},
+    {init:'TB',bg:'rgba(99,102,241,.12)',tc:'#4f46e5',name:'Tomas B.',course:'Mathematics · 1st year',tags:['Calculus','Linear Algebra'],match:75,online:true},
+  ];
+ 
+  const BOOKS = [
+    {e:'📘',title:'Algorithms, 4th Ed.',course:'CS301',price:'$14',orig:'$89',bg:'rgba(99,102,241,.08)'},
+    {e:'📗',title:'Organic Chemistry',course:'CHEM202',price:'$22',orig:'$110',bg:'rgba(16,185,129,.08)'},
+    {e:'📙',title:'Microeconomics Principles',course:'ECON101',price:'$9',orig:'$65',bg:'rgba(245,158,11,.08)'},
+    {e:'📕',title:'Anatomy Notes Bundle',course:'MED301',price:'$6',orig:'$40',bg:'rgba(244,63,94,.08)'},
+    {e:'📓',title:'Linear Algebra Guide',course:'MATH201',price:'$12',orig:'$75',bg:'rgba(139,92,246,.08)'},
+    {e:'📔',title:'Principles of Civil Law',course:'LAW101',price:'$18',orig:'$95',bg:'rgba(6,182,212,.08)'},
+  ];
+ 
+  const FAQS = [
+    {q:'How do I access my pod?',a:'After booking, you receive a QR code via email and in-app. Scan it at the pod entrance kiosk to unlock your session automatically.'},
+    {q:'Can I extend my session?',a:'Yes — if the pod is free for the next slot, you can extend directly from the app up to 5 minutes before your current session ends.'},
+    {q:"What's inside a study pod?",a:'Every pod includes a height-adjustable desk, ergonomic chair, dual monitor mount, USB-C charging hub, ultra-fast Wi-Fi, acoustic foam panels, and climate control.'},
+    {q:'How does StudyBuddy matching work?',a:'Our algorithm considers your enrolled courses, preferred study times, and learning style to suggest the most compatible partners nearby.'},
+    {q:'Is Secondbook safe to use?',a:'All sellers are verified students with university email addresses. Every transaction is protected and we offer dispute resolution.'},
+    {q:'What if I need to cancel?',a:'Free cancellations are available up to 1 hour before your session. Late cancellations use 1 cancellation credit (Student plan: 3/month).'},
+  ];
+ 
+  // ─── NAV ───
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-'+id).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+  function setNav(el) {
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+ 
+  // ─── DASHBOARD ───
+  function showDash(id, el) {
+    document.querySelectorAll('.dash-inner').forEach(d => d.classList.remove('visible'));
+    document.getElementById('dash-'+id).classList.add('visible');
+    document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+ 
+  // ─── AVAILABILITY GRID ───
+  const POD_STATES = [1,1,0,1,0,0,1,1,1,0,1,1,0,1,1,1];
+  let selectedPodName = null;
+ 
+  function buildAvailGrid() {
+    const g = document.getElementById('avail-grid');
+    if (!g) return;
+    g.innerHTML = POD_STATES.map((s,i) => {
+      const name = String.fromCharCode(65+Math.floor(i/4))+(i%4+1);
+      return `<div class="avail-pod ${s?'free':'busy'}" onclick="${s?`selectAvailPod(this,'${name}')`:''}">
+        <div class="avail-pod-name">${name}</div>
+        <div class="avail-pod-status">${s?'Free':'Busy'}</div>
+      </div>`;
+    }).join('');
+    const t = new Date();
+    const el = document.getElementById('avail-time');
+    if (el) el.textContent = t.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  }
+ 
+  function selectAvailPod(el, name) {
+    document.querySelectorAll('.avail-pod.free').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedPodName = name;
+    const info = document.getElementById('avail-selected-info');
+    const nameEl = document.getElementById('avail-selected-name');
+    if (info) info.style.display = 'flex';
+    if (nameEl) nameEl.textContent = `Pod ${name} selected`;
+  }
+ 
+  // ─── BUDDY CARDS ───
+  function buddyCard(b) {
+    return `<div class="buddy-card">
+      <div class="buddy-av" style="background:${b.bg};color:${b.tc}">${b.init}</div>
+      <div class="buddy-body">
+        <div class="buddy-name-row">
+          <span class="buddy-name">${b.name}</span>
+          ${b.online?'<div class="online-dot"></div>':''}
+        </div>
+        <div class="buddy-course">${b.course}</div>
+        <div class="buddy-tags-row">${b.tags.map(t=>`<span class="buddy-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="buddy-score-col">
+        <div>
+          <div class="match-pct">${b.match}%</div>
+          <div class="match-lbl">MATCH</div>
+        </div>
+        <button class="btn btn-dark" style="font-size:11px;padding:7px 14px;border-radius:8px;">Connect</button>
+      </div>
+    </div>`;
+  }
+ 
+  function buildBuddyPreview() {
+    const el = document.getElementById('buddy-preview');
+    if (el) el.innerHTML = BUDDIES.slice(0,4).map(buddyCard).join('');
+    const el2 = document.getElementById('buddy-full');
+    if (el2) el2.innerHTML = BUDDIES.map(buddyCard).join('');
+  }
+ 
+  // ─── BOOK CARDS ───
+  function bookCard(b) {
+    return `<div class="book-card">
+      <div class="book-cover" style="background:${b.bg}">${b.e}</div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-course">${b.course}</div>
+        <div class="book-prices"><span class="book-price">${b.price}</span><span class="book-orig">${b.orig}</span></div>
+      </div>
+    </div>`;
+  }
+ 
+  function buildBooks() {
+    const p = document.getElementById('books-preview');
+    if (p) p.innerHTML = BOOKS.slice(0,4).map(bookCard).join('');
+    const f = document.getElementById('books-full');
+    if (f) f.innerHTML = BOOKS.map(bookCard).join('');
+  }
+ 
+  // ─── FAQ ───
+  function buildFAQ() {
+    const el = document.getElementById('faq-list');
+    if (!el) return;
+    el.innerHTML = FAQS.map((f,i) => `
+      <div class="faq-item" id="faq-${i}">
+        <div class="faq-q" onclick="toggleFAQ(${i})">${f.q}<span class="faq-arrow">+</span></div>
+        <div class="faq-a">${f.a}</div>
+      </div>`).join('');
+  }
+  function toggleFAQ(i) {
+    document.getElementById('faq-'+i).classList.toggle('open');
+  }
+ 
+  // ─── BOOKING WIZARD ───
+  let wLoc='', wPod='', wTime='', wDur='1 hour', wStep=1;
+ 
+  function goWizStep(n) {
+    for (let i=1;i<=4;i++) {
+      document.getElementById('ws'+i).classList.remove('visible');
+      const dot=document.getElementById('wd'+i), line=document.getElementById('wl'+i);
+      if(i<n){dot.className='wiz-dot done';if(line)line.className='wiz-line done';}
+      else if(i===n){dot.className='wiz-dot active';if(line)line.className='wiz-line';}
+      else{dot.className='wiz-dot';if(line)line.className='wiz-line';}
     }
-    
-    function setActive(el) {
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      el.classList.add('active');
+    document.getElementById('ws'+n).classList.add('visible');
+    wStep=n;
+    if(n===2)buildPodPicker();
+    if(n===3)buildTimePicker();
+    if(n===4)buildConfirm();
+  }
+ 
+  function pickLocation(el,loc) {
+    document.querySelectorAll('#ws1 .wiz-card').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
+    wLoc=loc;
+    setTimeout(()=>goWizStep(2),180);
+  }
+ 
+  function buildPodPicker() {
+    const pods=[{n:'A1',f:true},{n:'A2',f:false},{n:'A3',f:true},{n:'A4',f:true},{n:'B1',f:true},{n:'B2',f:false},{n:'B3',f:true},{n:'B4',f:false}];
+    document.getElementById('pod-pick-grid').innerHTML = pods.map(p=>`
+      <div class="pod-pick ${p.f?'':'occupied'}" onclick="${p.f?`selectPod(this,'${p.n}')`:''}" style="${!p.f?'pointer-events:none':''}">
+        <span style="font-size:18px;">${p.f?'◎':'✕'}</span>
+        <span class="pod-pick-name">${p.n}</span>
+        <span class="pod-pick-st">${p.f?'Free':'Busy'}</span>
+      </div>`).join('');
+  }
+ 
+  function selectPod(el,n) {
+    document.querySelectorAll('.pod-pick').forEach(c=>c.classList.remove('sel'));
+    el.classList.add('sel');
+    wPod='Pod '+n;
+    setTimeout(()=>goWizStep(3),180);
+  }
+ 
+  function buildTimePicker() {
+    const times=['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
+    const unavail=['10:00','11:00','15:00'];
+    const date=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    document.getElementById('wiz-date-display').textContent=date;
+    document.getElementById('wiz-time-grid').innerHTML=times.map(t=>`
+      <div class="time-slot ${unavail.includes(t)?'unavail':''}" onclick="${unavail.includes(t)?'':`pickTime(this,'${t}')`}">${t}</div>`).join('');
+  }
+ 
+  function pickTime(el,t) {
+    document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('sel'));
+    el.classList.add('sel');
+    wTime=t;
+    setTimeout(()=>goWizStep(4),180);
+  }
+ 
+  function pickDur(el,d) {
+    el.parentElement.querySelectorAll('.dur-btn').forEach(b=>b.classList.remove('active'));
+    el.classList.add('active');
+    wDur=d;
+  }
+ 
+  function buildConfirm() {
+    document.getElementById('cf-loc').textContent=wLoc||'City Campus Center';
+    document.getElementById('cf-pod').textContent=wPod||'Pod A3';
+    document.getElementById('cf-date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+    document.getElementById('cf-time').textContent=(wTime||'14:00')+' · '+wDur;
+  }
+ 
+  function confirmBook() {
+    showPage('dash');
+    showDash('bookings', document.querySelectorAll('.dash-nav-item')[1]);
+    setTimeout(()=>alert('✓ Booking confirmed! Your QR code has been sent.'),400);
+  }
+ 
+  // ─── TIMER ───
+  let tSec=25*60, tTotal=25*60, tRunning=false, tInterval=null;
+ 
+  function toggleTimer() {
+    tRunning=!tRunning;
+    const btn=document.getElementById('dash-timer-btn');
+    if(btn) btn.textContent=tRunning?'⏸ Pause':'▶ Start';
+    if(tRunning) {
+      tInterval=setInterval(()=>{
+        if(tSec<=0){clearInterval(tInterval);tRunning=false;if(btn)btn.textContent='▶ Start';alert('Focus session complete. Rest well.');return;}
+        tSec--;
+        updateTimerUI();
+      },1000);
+    } else {
+      clearInterval(tInterval);
     }
-    
-    function showDashPage(id, el) {
-      document.querySelectorAll('.dash-page').forEach(p => p.style.display = 'none');
-      const targetDash = document.getElementById('dash-' + id);
-      if (targetDash) targetDash.style.display = 'block';
-      
-      document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
-      if(el) el.classList.add('active');
+  }
+ 
+  function resetTimer() {
+    clearInterval(tInterval); tRunning=false; tSec=tTotal;
+    const btn=document.getElementById('dash-timer-btn');
+    if(btn) btn.textContent='▶ Start';
+    updateTimerUI();
+  }
+ 
+  function updateTimerUI() {
+    const m=Math.floor(tSec/60),s=tSec%60;
+    const str=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    const pct=Math.round((tSec/tTotal)*100);
+    const d=document.getElementById('dash-time');
+    if(d) d.textContent=str;
+    const r=document.getElementById('dash-ring');
+    if(r) r.style.setProperty('--prog',pct+'%');
+  }
+ 
+  // ─── FILTER BTNS ───
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('dur-btn') && e.target.closest('#buddy-filters')) {
+      e.target.closest('#buddy-filters').querySelectorAll('.dur-btn').forEach(b=>b.classList.remove('active'));
+      e.target.classList.add('active');
     }
-     
-    // =========== HERO POD GRID BINDINGS ===========
-    function buildHeroPods() {
-      const grid = document.getElementById('hero-pods');
-      if (!grid) return;
-      const states = [1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1];
-      grid.innerHTML = states.map((s, i) => `
-        <div class="pod-slot ${s ? 'available' : 'occupied'}" onclick="this.classList.toggle('selected')">
-          <div class="pod-num">${String.fromCharCode(65 + Math.floor(i / 4))}${(i % 4) + 1}</div>
-          <div class="pod-status" style="color:${s ? 'var(--green)' : 'var(--text3)'}">${s ? 'Free' : 'Busy'}</div>
-        </div>`).join('');
-    }
-     
-    // =========== COMPONENT: INTERACTIVE FAQ ARRAYS ===========
-    const faqs = [
-      {q: 'How do I access my pod?', a: 'After booking, you receive a QR code via email and in-app. Scan it at the pod entrance kiosk to unlock your session automatically.'},
-      {q: 'Can I extend my booking?', a: 'Yes — if the pod is available for the next slot, you can extend directly from the app up to 5 minutes before your current session ends.'},
-      {q: "What's included in the Study Pod?", a: 'Every pod includes a height-adjustable desk, ergonomic chair, monitor mount, USB-C charging hub, ultra-fast Wi-Fi, and soundproof walls with acoustic foam.'},
-      {q: 'How does StudyBuddy matching work?', a: 'Our algorithm considers your enrolled courses, preferred study times, learning style, and past session data to suggest the most compatible partners.'},
-      {q: 'Is Secondbook safe to use?', a: 'All sellers are verified students with university email addresses. Transactions are protected and we offer a dispute resolution process for any issues.'},
-      {q: 'What if I need to cancel a booking?', a: 'Free cancellations are available up to 1 hour before your session. Last-minute cancellations use 1 cancellation credit (Student plan: 3/month).'},
-    ];
-    
-    function buildFAQ() {
-      const list = document.getElementById('faq-list');
-      if (!list) return;
-      list.innerHTML = faqs.map((f, i) => `
-        <div class="faq-item" id="faq-${i}">
-          <div class="faq-q" onclick="toggleFAQ(${i})">${f.q} <span class="arrow">▾</span></div>
-          <div class="faq-a">${f.a}</div>
-        </div>`).join('');
-    }
-    
-    function toggleFAQ(i) {
-      const el = document.getElementById('faq-' + i);
-      if (el) el.classList.toggle('open');
-    }
-     
-    // =========== STEP WIZARD STATE SYSTEM (BOOKING FLOW) ===========
-    let bookingStep = 1, selectedLocation = 'City Campus', selectedPod = null, selectedTime = null, selectedDuration = '1h';
-    
-    function selectLocation(el, name) {
-      selectedLocation = name;
-      document.querySelectorAll('#bstep1 .wizard-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      setTimeout(() => goBookingStep(2), 200);
-    }
-    
-    function goBookingStep(n) {
-      for (let i = 1; i <= 4; i++) {
-        const stepEl = document.getElementById('bstep' + i);
-        if (stepEl) stepEl.style.display = 'none';
-      }
-      const targetStep = document.getElementById('bstep' + n);
-      if (targetStep) targetStep.style.display = 'block';
-      
-      bookingStep = n;
-      updateStepIndicator(n);
-      
-      if (n === 2) buildPodGrid();
-      if (n === 3) buildTimeSlots();
-      if (n === 4) {
-        document.getElementById('confirm-details').textContent = (selectedPod || 'Pod A3') + ' · ' + selectedLocation;
-        document.getElementById('confirm-time').textContent = 'Today · ' + (selectedTime || '14:00') + ' (' + selectedDuration + ')';
-      }
-    }
-    
-    function updateStepIndicator(n) {
-      for (let i = 1; i <= 4; i++) {
-        const dot = document.getElementById('sdot' + i);
-        const line = document.getElementById('sline' + i);
-        if (dot) {
-          if (i < n) { dot.classList.add('done'); dot.classList.remove('active'); }
-          else if (i === n) { dot.classList.add('active'); dot.classList.remove('done'); }
-          else { dot.classList.remove('done', 'active'); }
-        }
-        if (line) {
-          if (i < n) line.classList.add('done');
-          else line.classList.remove('done');
-        }
-      }
-    }
-    
-    function buildPodGrid() {
-      const g = document.getElementById('pod-select-grid');
-      if (!g) return;
-      const pods = [
-        {n: 'A1', free: true}, {n: 'A2', free: false}, {n: 'A3', free: true}, {n: 'A4', free: true},
-        {n: 'B1', free: true}, {n: 'B2', free: false}, {n: 'B3', free: true}, {n: 'B4', free: false}
-      ];
-      g.innerHTML = pods.map(p => `
-        <div class="wizard-card pod-select-card ${p.free ? 'available' : 'busy'}" onclick="${p.free ? `selectPod(this,'${p.n}')` : ''}" style="${!p.free ? 'opacity:0.4; cursor:not-allowed;' : ''}">
-          <div style="font-size:20px; margin-bottom:8px;">${p.free ? '🟢' : '🔴'}</div>
-          <div style="font-family:var(--font-head); font-size:16px; font-weight:700">Pod ${p.n}</div>
-          <div style="font-size:12px; color:var(--text3); margin-top:2px">${p.free ? 'Available' : 'Occupied'}</div>
-        </div>`).join('');
-    }
-    
-    function selectPod(el, name) {
-      document.querySelectorAll('.pod-select-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      selectedPod = 'Pod ' + name;
-      setTimeout(() => goBookingStep(3), 200);
-    }
-    
-    function buildTimeSlots() {
-      const g = document.getElementById('time-slots');
-      if (!g) return;
-      const times = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
-      const unavail = ['10:00', '11:00', '15:00'];
-      g.innerHTML = times.map(t => `
-        <div class="time-slot ${unavail.includes(t) ? 'unavailable' : ''}" onclick="${unavail.includes(t) ? '' : `selectTime(this,'${t}')`}">${t}</div>`).join('');
-      
-      const dateEl = document.getElementById('selected-date');
-      if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-US', {weekday: 'long', month: 'short', day: 'numeric'});
-    }
-    
-    function selectTime(el, time) {
-      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-      el.classList.add('selected');
-      selectedTime = time;
-      setTimeout(() => goBookingStep(4), 200);
-    }
-    
-    function selectDuration(el, d) {
-      el.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
-      selectedDuration = d;
-    }
-     
-    // =========== COMPONENT: STUDYBUDDY DATA LAYERS ===========
-    const buddies = [
-      {n: 'Sabrina A.', avatar: 'SA', color: 'rgba(139,92,246,.15)', tc: '#a78bfa', course: 'Computer Science · 3rd year', tags: ['Algorithms', 'Data Structures', 'Mornings'], match: 94, online: true},
-      {n: 'Marcus R.', avatar: 'MR', color: 'rgba(16,185,129,.15)', tc: '#34d399', course: 'Data Science · 2nd year', tags: ['Statistics', 'Machine Learning', 'Evenings'], match: 89, online: true},
-      {n: 'Leila K.', avatar: 'LK', color: 'rgba(245,158,11,.15)', tc: '#fbbf24', course: 'Medicine · 4th year', tags: ['Biochemistry', 'Anatomy', 'Weekends'], match: 85, online: false},
-      {n: 'Rauf M.', avatar: 'RM', color: 'rgba(244,63,94,.15)', tc: '#fb7185', course: 'Law · 2nd year', tags: ['Constitutional Law', 'Mornings'], match: 80, online: true},
-      {n: 'Elena V.', avatar: 'EV', color: 'rgba(6,182,212,.15)', tc: '#22d3ee', course: 'Engineering · 3rd year', tags: ['Thermodynamics', 'Mechanics'], match: 78, online: false},
-      {n: 'Tomas B.', avatar: 'TB', color: 'rgba(99,102,241,.15)', tc: 'var(--accent3)', course: 'Mathematics · 1st year', tags: ['Calculus', 'Linear Algebra'], match: 75, online: true},
-    ];
-    
-    function buildBuddyList() {
-      const el = document.getElementById('buddy-list');
-      if (!el) return;
-      el.innerHTML = buddies.map(b => `
-        <div class="buddy-card">
-          <div class="buddy-avatar" style="background:${b.color}; color:${b.tc}">${b.avatar}</div>
-          <div class="buddy-info">
-            <div style="display:flex; align-items:center; gap:8px">
-              <span class="buddy-name">${b.n}</span>
-              ${b.online ? '<span class="badge badge-green" style="font-size:10px">Online</span>' : ''}
-            </div>
-            <div class="buddy-meta">${b.course}</div>
-            <div class="buddy-tags">${b.tags.map(t => `<span class="buddy-tag">${t}</span>`).join('')}</div>
-          </div>
-          <div style="display:flex; flex-direction:column; align-items:center; gap:8px">
-            <div class="match-score">${b.match}%</div>
-            <button class="btn-primary" style="padding:6px 14px; font-size:12px">Connect</button>
-          </div>
-        </div>`).join('');
-    }
-     
-    // =========== COMPONENT: SECONDBOOK MARKET STORES ===========
-    const books = [
-      {e: '📘', title: 'Algorithms, 4th Ed.', course: 'CS301', price: '$14', orig: '$89', bg: 'rgba(99,102,241,.1)'},
-      {e: '📗', title: 'Organic Chemistry', course: 'CHEM202', price: '$22', orig: '$110', bg: 'rgba(16,185,129,.1)'},
-      {e: '📙', title: 'Microeconomics Principles', course: 'ECON101', price: '$9', orig: '$65', bg: 'rgba(245,158,11,.1)'},
-      {e: '📕', title: 'Anatomy Notes Bundle', course: 'MED301', price: '$6', orig: '$40', bg: 'rgba(244,63,94,.1)'},
-      {e: '📓', title: 'Linear Algebra Guide', course: 'MATH201', price: '$12', orig: '$75', bg: 'rgba(139,92,246,.1)'},
-      {e: '📔', title: 'Principles of Civil Law', course: 'LAW101', price: '$18', orig: '$95', bg: 'rgba(6,182,212,.1)'}
-    ];
-    
-    function buildBooksGrid() {
-      const g = document.getElementById('books-grid');
-      if (!g) return;
-      g.innerHTML = books.map(b => `
-        <div class="book-card">
-          <div class="book-cover" style="background:${b.bg}">${b.e}</div>
-          <div class="book-info">
-            <div class="book-title">${b.title}</div>
-            <div class="book-course">${b.course}</div>
-            <div class="book-price-row"><span class="book-price">${b.price}</span><span class="book-orig">${b.orig}</span></div>
-          </div>
-        </div>`).join('');
-    }
-     
-    // =========== COMPONENT: CLOCK FOCUS POMODORO SYSTEM ===========
-    let timerInterval = null, timerSecs = 25 * 60, timerRunning = false, timerTotal = 25 * 60;
-    
-    function toggleTimer() {
-      timerRunning = !timerRunning;
-      const txt = timerRunning ? '⏸ Pause' : '▶ Start';
-      
-      const btn = document.getElementById('timer-btn');
-      if (btn) btn.textContent = txt;
-     
-      if (timerRunning) {
-        timerInterval = setInterval(() => {
-          if (timerSecs <= 0) { 
-            clearInterval(timerInterval); 
-            timerRunning = false; 
-            if (btn) btn.textContent = '▶ Start'; 
-            alert('Focus session completed! Take a step back and rest.');
-            return; 
-          }
-          timerSecs--;
-          updateTimerDisplay();
-        }, 1000);
-      } else {
-        clearInterval(timerInterval);
-      }
-    }
-    
-    function resetTimer() { 
-      clearInterval(timerInterval); 
-      timerRunning = false; 
-      timerSecs = timerTotal; 
-      const btn = document.getElementById('timer-btn');
-      if (btn) btn.textContent = '▶ Start'; 
-      updateTimerDisplay(); 
-    }
-    
-    function updateTimerDisplay() {
-      const m = Math.floor(timerSecs / 60), s = timerSecs % 60;
-      const timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-      const pct = Math.round((timerSecs / timerTotal) * 100);
-      
-      const disp = document.getElementById('timer-display');
-      if (disp) disp.textContent = timeStr;
-      
-      const circle = document.getElementById('timer-circle');
-      if (circle) circle.style.setProperty('--prog', pct + '%');
-    }
-     
-    // =========== DOM DELEGATIONS & FILTERS ===========
-    document.addEventListener('click', function(e) {
-      if (e.target.classList.contains('filter-btn') && e.target.closest('.match-filter')) {
-        e.target.closest('.match-filter').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
+  });
+ 
+  // ─── SCROLL REVEAL ───
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        revealObs.unobserve(entry.target);
       }
     });
-     
-    // =========== INIT ENGINES ORCHESTRATION ===========
-    window.addEventListener('load', () => {
-      buildHeroPods();
-      buildFAQ();
-      buildBuddyList();
-      buildBooksGrid();
-      goBookingStep(1);
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+ 
+  // ─── INIT ───
+  window.addEventListener('load', () => {
+    buildAvailGrid();
+    buildBuddyPreview();
+    buildBooks();
+    buildFAQ();
+    goWizStep(1);
+    updateTimerUI();
+ 
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObs.observe(el);
+      // trigger elements already in view
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) el.classList.add('in');
     });
-  </script>
+  });
+</script>
 </body>
 </html>
